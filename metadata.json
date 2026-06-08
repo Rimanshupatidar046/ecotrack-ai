@@ -1,0 +1,8 @@
+{
+  "name": "EcoTrack AI",
+  "description": "An intelligent climate-tech platform that helps individuals measure, track, and reduce their carbon footprint through immersive data analytics, personalized roadmaps, and AI sustainability guidance.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
