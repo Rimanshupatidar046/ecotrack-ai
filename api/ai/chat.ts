@@ -1,4 +1,4 @@
-import { createChatResponse } from "./common";
+import { createChatResponse } from "./common.js";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {

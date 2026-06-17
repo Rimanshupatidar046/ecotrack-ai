@@ -1,4 +1,4 @@
-import { buildCalculatedResponse } from "./common";
+import { buildCalculatedResponse } from "./common.js";
 
 export default async function handler(req: any, res: any) {
   if (req.method !== "POST") {
