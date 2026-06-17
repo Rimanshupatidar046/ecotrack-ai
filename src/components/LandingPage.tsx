@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Leaf, ShieldCheck, Cpu, Zap, Trophy, HelpCircle, ArrowRight, Star, Globe, Sparkles, Twitter, Linkedin, Github, Mail } from "lucide-react";
+import { Leaf, ShieldCheck, Cpu, Zap, Trophy, HelpCircle, ArrowRight, Star, Globe, Sparkles, Twitter, Linkedin, Github, Mail, Activity, BrainCircuit, Rocket } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ThreeEarth from "./ThreeEarth";
 import gsap from "gsap";
@@ -340,27 +340,32 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
             {
               step: "01",
               title: "Input Domestic Dimensions",
-              detail: "Provide basic parameters on transportation variables, heating demands, weekly household compost outputs, and diets in minutes."
+              detail: "Provide basic parameters on transportation variables, heating demands, weekly household compost outputs, and diets in minutes.",
+              icon: Activity
             },
             {
               step: "02",
               title: "AI Analysis & Breakdown",
-              detail: "Our scientific formula models exact Carbon Score metrics, generating high standard circular pie breakdowns and score diagnostic grades."
+              detail: "Our scientific formula models exact Carbon Score metrics, generating high standard circular pie breakdowns and score diagnostic grades.",
+              icon: BrainCircuit
             },
             {
               step: "03",
               title: "Launch Carbon Neutral Journey",
-              detail: "Unlock interactive milestones, complete green gamified challenges, level up, and inspect PDF summaries."
+              detail: "Unlock interactive milestones, complete green gamified challenges, level up, and inspect PDF summaries.",
+              icon: Rocket
             }
-          ].map((step, idx) => (
+          ].map((step, idx) => {
+            const IconComp = step.icon;
+            return (
             <motion.div 
               key={idx} 
               variants={fadeInUpItem}
-              className="relative"
+              className="relative group"
             >
               {/* Connecting lines with scanning pulsed gradients */}
               {idx < 2 && (
-                <div className="hidden md:block absolute top-[55%] -right-7 w-6 h-[2px] border-t-2 border-dashed border-emerald-500/25 z-0">
+                <div className="hidden md:block absolute top-[40%] -right-7 w-6 h-[2px] border-t-2 border-dashed border-emerald-500/25 z-0">
                   <div className="h-2 w-2 rounded-full bg-cyan-400 animate-ping absolute -top-1" style={{ animationDuration: '3s' }} />
                   <div className="h-1.5 w-1.5 rounded-full bg-emerald-400 absolute -top-[3px] left-1/2 -translate-x-1/2" />
                 </div>
@@ -368,20 +373,29 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
               
               <AnimatedCard 
                 id={`step-${idx}`}
-                className="bg-white/5 border border-white/10 p-8 rounded-2xl h-full"
-                glowColor="rgba(59, 130, 246, 0.15)"
+                className="bg-gradient-to-b from-white/10 to-white/5 border border-white/10 p-8 rounded-3xl h-full backdrop-blur-xl relative overflow-hidden"
+                glowColor="rgba(16, 185, 129, 0.2)"
               >
-                <div className="text-5xl font-extrabold text-white/5 font-mono absolute top-4 right-6 group-hover:text-emerald-500/10 transition-colors">
-                  {step.step}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-500/10 blur-[40px] group-hover:bg-cyan-500/20 transition-colors duration-500 rounded-full" />
+                
+                <div className="flex items-center justify-between mb-6">
+                  <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:scale-110 group-hover:bg-emerald-500/20 transition-all duration-300">
+                    <IconComp className="w-7 h-7 text-emerald-400" />
+                  </div>
+                  <div className="text-5xl font-extrabold text-white/5 font-mono group-hover:text-emerald-500/10 transition-colors duration-300 select-none">
+                    {step.step}
+                  </div>
                 </div>
-                <h3 className="text-xl font-bold text-white mb-3 pt-6 flex items-center space-x-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-emerald-400 to-teal-400 animate-pulse" />
-                  <span>{step.title}</span>
+                
+                <h3 className="text-xl font-bold text-white mb-3">
+                  {step.title}
                 </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{step.detail}</p>
+                <p className="text-sm text-slate-400 leading-relaxed font-medium">
+                  {step.detail}
+                </p>
               </AnimatedCard>
             </motion.div>
-          ))}
+          )})}
         </motion.div>
       </motion.section>
 
