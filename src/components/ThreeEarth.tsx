@@ -36,7 +36,7 @@ export default function ThreeEarth() {
     const textureCanvas = document.createElement("canvas");
     textureCanvas.width = 1024;
     textureCanvas.height = 512;
-    const ctx = textureCanvas.getContext("2d")!;
+    const ctx = textureCanvas.getContext("2d", { willReadFrequently: true })!;
 
     // Fills ocean
     ctx.fillStyle = "#0c1d33"; // deep oceanic blue
@@ -290,13 +290,15 @@ export default function ThreeEarth() {
     // 9. Render & Animation Loop
     let animationFrameId: number;
 
-    const clock = new THREE.Clock();
-
+    let lastTime = performance.now();
+    let time = 0;
     const animate = () => {
       animationFrameId = requestAnimationFrame(animate);
 
-      const delta = clock.getDelta();
-      const time = clock.getElapsedTime();
+      const now = performance.now();
+      const delta = (now - lastTime) / 1000;
+      lastTime = now;
+      time += delta;
 
       // Smooth interpolation for dragging physics (lerp)
       currentRotationY += (targetRotationY - currentRotationY) * 0.05;

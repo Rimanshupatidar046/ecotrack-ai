@@ -227,7 +227,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
           </div>
 
           <div className="h-[210px] relative">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
               <PieChart>
                 <Pie
                   data={breakdownData}
@@ -281,7 +281,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
           </div>
 
           <div className="h-[260px] pt-4">
-            <ResponsiveContainer width="100%" height="100%">
+            <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
               <BarChart data={comparisonData}>
                 <XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 10, fontFamily: "sans-serif" }} stroke="rgba(255,255,255,0.05)" />
                 <YAxis tick={{ fill: "#94a3b8", fontSize: 10, fontFamily: "mono" }} stroke="rgba(255,255,255,0.05)" />
@@ -314,7 +314,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
         </div>
 
         <div className="h-[220px] pt-4">
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" height="100%" minWidth={1} minHeight={1}>
             <LineChart data={trendData}>
               <XAxis dataKey="name" tick={{ fill: "#94a3b8", fontSize: 10, fontFamily: "sans-serif" }} stroke="rgba(255,255,255,0.05)" />
               <YAxis tick={{ fill: "#94a3b8", fontSize: 10, fontFamily: "mono" }} stroke="rgba(255,255,255,0.05)" />

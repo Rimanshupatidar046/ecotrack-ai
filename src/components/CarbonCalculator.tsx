@@ -78,15 +78,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
     <div className="w-full rounded-3xl p-6 md:p-8 shadow-2xl glassmorphism relative overflow-hidden" id="calculator-panel">
       
       {/* 1. Header with micro specs */}
-      <div className="mb-8 flex flex-col md:flex-row items-start md:items-center justify-between border-b border-white/10 pb-6">
-        <div>
-          <span className="text-emerald-400 font-mono text-xs tracking-widest block mb-1">DIAGNOSTIC TELEMETRY</span>
-          <h2 className="text-2xl font-extrabold text-white">Carbon Assessment Diagnostic</h2>
-        </div>
-        <div className="mt-2 md:mt-0 flex items-center space-x-2 text-xs font-mono text-slate-400">
-          <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-          <span>IPCC compliant formulas active</span>
-        </div>
+      <div className="mb-6 flex justify-center">
+        <h2 className="text-2xl font-extrabold text-white">Carbon Assessment Diagnostic</h2>
       </div>
 
       {/* 2. Step Progress Indicators - Animate Active State */}
@@ -160,9 +153,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="5"
                       value={inputs.carKm}
                       onChange={(e) => handleInputChange("carKm", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Solo commutes directly intensify localized NO2 emissions.</p>
                   </div>
 
                   {/* Bike travel KM/day */}
@@ -179,9 +170,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="1"
                       value={inputs.bikeKm}
                       onChange={(e) => handleInputChange("bikeKm", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Offsetting short vehicular runouts with micromobility acts carbon-neutral.</p>
                   </div>
 
                   {/* Public Transport intensity level */}
@@ -224,9 +213,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="1"
                       value={inputs.flightsYear}
                       onChange={(e) => handleInputChange("flightsYear", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-rose-400 focus:outline-none focus:ring-1 focus:ring-rose-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">High altitude radiatively-forced emissions double overall carbon rates rapidly.</p>
                   </div>
                 </div>
               </div>
@@ -255,9 +242,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="25"
                       value={inputs.electricityKwh}
                       onChange={(e) => handleInputChange("electricityKwh", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Consolidated household usage includes major water heat or laundry demands.</p>
                   </div>
 
                   {/* Air Conditioning active hours/day */}
@@ -274,9 +259,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="1"
                       value={inputs.acHours}
                       onChange={(e) => handleInputChange("acHours", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Mechanical HVAC cooling consumes maximum inductive startup amperes on local grids.</p>
                   </div>
 
                   {/* Renewable energy offsets % */}
@@ -296,9 +279,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="5"
                       value={inputs.renewablePct}
                       onChange={(e) => handleInputChange("renewablePct", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-cyan-400 focus:outline-none focus:ring-1 focus:ring-cyan-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Utilizing local PV panels or green electricity tariffs directly discounts standard load emission results.</p>
                   </div>
                 </div>
               </div>
@@ -311,8 +292,6 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                   <Leaf className="w-5 h-5 text-emerald-400" />
                   <span>Nutrition Habits & Agrisect Intensity</span>
                 </h3>
-
-                <p className="text-xs text-slate-400 font-mono">Food supply lines are highly radiative; livestock processes yield heavy methane (CH4) outputs compared to crop cycles.</p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   {[
@@ -430,9 +409,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                       step="1"
                       value={inputs.weeklyWasteKg}
                       onChange={(e) => handleInputChange("weeklyWasteKg", Number(e.target.value))}
-                      className="w-full h-1.5 bg-white/10 rounded-lg cursor-pointer accent-emerald-400 focus:outline-none focus:ring-1 focus:ring-emerald-500/50"
                     />
-                    <p className="text-[11px] text-slate-500 font-mono">Anaerobic municipal dump biodegradation yields continuous methane release vectors if not composted locally.</p>
                   </div>
                 </div>
               </div>
