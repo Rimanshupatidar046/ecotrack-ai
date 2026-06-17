@@ -104,15 +104,18 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
   const benefits = [
     {
       title: "Reduce Utility Costs",
-      detail: "Learn how setting slight thermodynamic offsets and introducing smart strips offsets up to $250 in quarterly household electricity bills."
+      detail: "Learn how setting slight thermodynamic offsets and introducing smart strips offsets up to $250 in quarterly household electricity bills.",
+      image: "https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Form Greener Habits",
-      detail: "Effortlessly transition toward micro-commuting, plastic repurposing, and nutritional balance with adaptive daily triggers."
+      detail: "Effortlessly transition toward micro-commuting, plastic repurposing, and nutritional balance with adaptive daily triggers.",
+      image: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&w=800&q=80"
     },
     {
       title: "Lead Local Compliance",
-      detail: "Establish concrete, shareable statistics showcasing your community carbon offsets and compliance metrics directly in high standard visual PDF."
+      detail: "Establish concrete, shareable statistics showcasing your community carbon offsets and compliance metrics directly in high standard visual PDF.",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=800&q=80"
     }
   ];
 
@@ -428,6 +431,14 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                   </div>
                 ))}
               </div>
+
+              <div className="pt-6">
+                <img 
+                  src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
+                  alt="Platform Dashboard" 
+                  className="w-full h-56 object-cover rounded-2xl border border-white/10 shadow-2xl shadow-emerald-500/10"
+                />
+              </div>
             </div>
 
             <div className="lg:col-span-12 xl:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -479,14 +490,24 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
             <motion.div key={idx} variants={fadeInUpItem}>
               <AnimatedCard 
                 id={`benefit-card-${idx}`}
-                className="p-8 rounded-2xl bg-white/5 border border-white/10 h-full w-full"
+                className="rounded-2xl bg-white/5 border border-white/10 h-full w-full overflow-hidden flex flex-col group"
                 glowColor="rgba(6, 182, 212, 0.15)"
               >
-                <h3 className="text-lg font-bold text-emerald-300 mb-3 flex items-center space-x-2.5">
-                  <Leaf className="w-5 h-5 text-emerald-400 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
-                  <span>{benefit.title}</span>
-                </h3>
-                <p className="text-sm text-slate-400 leading-relaxed">{benefit.detail}</p>
+                <div className="h-48 w-full overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0b1320] via-transparent to-transparent z-10" />
+                  <img 
+                    src={benefit.image} 
+                    alt={benefit.title} 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
+                  />
+                </div>
+                <div className="p-8 flex-grow">
+                  <h3 className="text-lg font-bold text-emerald-300 mb-3 flex items-center space-x-2.5">
+                    <Leaf className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <span>{benefit.title}</span>
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">{benefit.detail}</p>
+                </div>
               </AnimatedCard>
             </motion.div>
           ))}
@@ -609,13 +630,22 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
 
       {/* 8. Call To Action Footer Banner with Dynamic Gradient Animation */}
       <motion.section 
-        className="py-16 px-4 bg-gradient-to-br from-white/10 to-transparent backdrop-blur-xl border border-white/10 rounded-2xl max-w-7xl mx-auto mb-10 overflow-hidden" 
+        className="py-24 px-4 border border-white/10 rounded-2xl max-w-7xl mx-auto mb-10 overflow-hidden relative" 
         id="section-cta-footer"
         variants={sectionAnimation}
         initial="initial"
         whileInView="whileInView"
         viewport={{ once: true }}
       >
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="https://images.unsplash.com/photo-1500829243541-74b677fecc30?auto=format&fit=crop&w=1600&q=80" 
+            alt="Nature Canopy" 
+            className="w-full h-full object-cover opacity-60 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#050B14] via-[#050B14]/80 to-[#050B14]" />
+        </div>
+        
         <div className="max-w-4xl mx-auto text-center space-y-6 relative z-10">
           <h2 className="text-3xl font-extrabold text-white">Ready to quantify your ecological metrics?</h2>
           <p className="text-slate-400 text-sm max-w-xl mx-auto">
