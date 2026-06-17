@@ -170,6 +170,8 @@ export default function ThreeEarth() {
     let targetRotationY = 0;
     let currentRotationX = 0;
     let currentRotationY = 0;
+    let velocityX = 0;
+    let velocityY = 0;
 
     const handleMouseDown = (e: MouseEvent) => {
       isDragging = true;
@@ -185,9 +187,12 @@ export default function ThreeEarth() {
         y: e.clientY - previousMousePosition.y,
       };
 
-      // Tune sensitivity
-      targetRotationY += deltaMove.x * 0.005;
-      targetRotationX += deltaMove.y * 0.005;
+      // Calculate momentum velocities
+      velocityX = deltaMove.x * 0.005;
+      velocityY = deltaMove.y * 0.005;
+
+      targetRotationY += velocityX;
+      targetRotationX += velocityY;
 
       // Keep rotation X bounded to prevent flipping upside down
       targetRotationX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotationX));
@@ -215,8 +220,11 @@ export default function ThreeEarth() {
         y: e.touches[0].clientY - previousMousePosition.y,
       };
 
-      targetRotationY += deltaMove.x * 0.008;
-      targetRotationX += deltaMove.y * 0.008;
+      velocityX = deltaMove.x * 0.008;
+      velocityY = deltaMove.y * 0.008;
+
+      targetRotationY += velocityX;
+      targetRotationX += velocityY;
       targetRotationX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotationX));
 
       previousMousePosition = { x: e.touches[0].clientX, y: e.touches[0].clientY };
@@ -242,9 +250,18 @@ export default function ThreeEarth() {
       lastTime = now;
       time += delta;
 
+      // Apply momentum decay when not dragging
+      if (!isDragging) {
+        velocityX *= 0.95; // Friction
+        velocityY *= 0.95;
+        targetRotationY += velocityX;
+        targetRotationX += velocityY;
+        targetRotationX = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, targetRotationX));
+      }
+
       // Smooth interpolation for dragging physics (lerp)
-      currentRotationY += (targetRotationY - currentRotationY) * 0.05;
-      currentRotationX += (targetRotationX - currentRotationX) * 0.05;
+      currentRotationY += (targetRotationY - currentRotationY) * 0.08;
+      currentRotationX += (targetRotationX - currentRotationX) * 0.08;
 
       // Apply drag controls + natural slow rotation
       earth.rotation.y = currentRotationY + time * 0.025;
