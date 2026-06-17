@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import App from './App';
 
@@ -14,24 +14,34 @@ describe('App Layout and Navigation', () => {
     // Verify Header exists
     expect(screen.getByRole('banner')).toBeInTheDocument();
     
-    // Check navigation items
-    const tabs = ['Workspace', 'Footprint Calculator', 'Action Hub', 'Eco Assistant'];
-    tabs.forEach(tab => {
-      expect(screen.getByText(tab)).toBeInTheDocument();
-    });
+    // The top nav has 'Platform Home' and 'Explore Workspace'
+    expect(screen.getByText('Platform Home')).toBeInTheDocument();
+    expect(screen.getByText('Explore Workspace')).toBeInTheDocument();
   });
 
-  it('can navigate between different tabs', () => {
+  it('can navigate between different tabs', async () => {
     render(<App />);
     
-    // Default tab is Dashboard
-    expect(screen.getByText(/Carbon Analytics Dashboard/i)).toBeInTheDocument();
+    // Landing page is default, click Explore Workspace to enter App
+    const exploreBtn = screen.getByText('Explore Workspace');
+    fireEvent.click(exploreBtn);
     
-    // Click on Calculator tab
-    const calcTab = screen.getByText('Footprint Calculator');
-    fireEvent.click(calcTab);
+    // Carbon Assessment should be visible (using findByText for lazy loaded)
+    const carbonTabs = await screen.findAllByText(/Carbon Assessment/i);
+    expect(carbonTabs.length).toBeGreaterThan(0);
     
-    // Calculator view should now be active
-    expect(screen.getByText(/Lifestyle Carbon Assessment/i)).toBeInTheDocument();
+    // Check navigation items inside Workspace
+    const tabs = ['Carbon Assessment', 'Analytics Dashboard', 'Commit Solutions', 'Eco Missions', 'Reduction Roadmap', 'AI Chatbot Assistant', 'Download ESG Reports'];
+    tabs.forEach(tab => {
+      expect(screen.getByRole('button', { name: new RegExp(tab, 'i') }) || screen.getByText(new RegExp(tab, 'i'))).toBeInTheDocument();
+    });
+
+    // Click on Gamification tab (Eco Missions)
+    const gamificationTab = screen.getByText('Eco Missions');
+    fireEvent.click(gamificationTab);
+    
+    // Gamification view should now be active (shows points etc)
+    const activeChallenge = await screen.findByText(/Active Eco Challenges & Missions/i);
+    expect(activeChallenge).toBeInTheDocument();
   });
 });

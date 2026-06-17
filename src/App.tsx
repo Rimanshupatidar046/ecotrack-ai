@@ -3,17 +3,18 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Leaf, Globe, Sparkles, Bot, LogOut, Award, BarChart3, Compass, Milestone, LayoutDashboard, FileText, ChevronRight, Check } from "lucide-react";
-import LandingPage from "./components/LandingPage";
-import CarbonCalculator from "./components/CarbonCalculator";
-import Dashboard from "./components/Dashboard";
-import Recommendations from "./components/Recommendations";
-import Gamification from "./components/Gamification";
-import Roadmap from "./components/Roadmap";
-import AiAssistant from "./components/AiAssistant";
-import ReportExport from "./components/ReportExport";
 import WeeklyTips from "./components/WeeklyTips";
+
+const LandingPage = lazy(() => import('./components/LandingPage'));
+const CarbonCalculator = lazy(() => import('./components/CarbonCalculator'));
+const Dashboard = lazy(() => import('./components/Dashboard'));
+const Recommendations = lazy(() => import('./components/Recommendations'));
+const Gamification = lazy(() => import('./components/Gamification'));
+const Roadmap = lazy(() => import('./components/Roadmap'));
+const AiAssistant = lazy(() => import('./components/AiAssistant'));
+const ReportExport = lazy(() => import('./components/ReportExport'));
 import { EcoChallenge, AchievementBadge, RoadmapMilestone, CalculationResult } from "./types";
 
 // Setup interactive initial mockup databases
@@ -194,6 +195,12 @@ export default function App() {
 
       {/* 2. Main Page Render Route */}
       <main id="main-content" className="flex-1 relative z-10">
+        <Suspense fallback={
+          <div className="flex-1 flex flex-col items-center justify-center min-h-[600px] gap-4">
+            <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
+            <p className="text-emerald-400 font-mono text-xs animate-pulse tracking-widest">LOADING MODULE...</p>
+          </div>
+        }>
         {activeView === "landing" ? (
           <LandingPage 
             onStartCalculator={() => {
@@ -410,6 +417,7 @@ export default function App() {
 
           </div>
         )}
+        </Suspense>
       </main>
 
     </div>

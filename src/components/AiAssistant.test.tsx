@@ -1,9 +1,18 @@
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import AiAssistant from './AiAssistant';
+import { CalculationResult } from '../types';
 
 // Mock fetch globally
 global.fetch = vi.fn();
+
+const mockScore: CalculationResult = {
+  carbonScore: 5.2,
+  sustainabilityScore: 70,
+  impactCategory: 'Average',
+  breakdown: { transport: 1, energy: 2, food: 1, waste: 1.2 },
+  recommendations: []
+};
 
 describe('AiAssistant', () => {
   beforeEach(() => {
@@ -11,10 +20,10 @@ describe('AiAssistant', () => {
   });
 
   it('renders the chat interface', () => {
-    render(<AiAssistant userScore={5.2} breakdown={null} />);
+    render(<AiAssistant scoreResult={mockScore} />);
     
-    expect(screen.getByText(/EcoTrack AI/i)).toBeInTheDocument();
-    expect(screen.getByPlaceholderText(/Ask about carbon footprint.../i)).toBeInTheDocument();
+    expect(screen.getByText(/EcoTrack AI Companion/i)).toBeInTheDocument();
+    expect(screen.getByPlaceholderText(/Ask local carbon advisor.../i)).toBeInTheDocument();
   });
 
   it('sends a message and handles the API response', async () => {
@@ -24,9 +33,9 @@ describe('AiAssistant', () => {
       json: async () => ({ text: 'This is a mock AI response.' }),
     });
 
-    render(<AiAssistant userScore={5.2} breakdown={null} />);
+    render(<AiAssistant scoreResult={mockScore} />);
     
-    const input = screen.getByPlaceholderText(/Ask about carbon footprint.../i);
+    const input = screen.getByPlaceholderText(/Ask local carbon advisor.../i);
     const sendBtn = screen.getByRole('button', { name: /Send Message/i });
 
     // Type a message
@@ -46,24 +55,25 @@ describe('AiAssistant', () => {
 
     // Ensure fetch was called
     expect(global.fetch).toHaveBeenCalledTimes(1);
-    expect(global.fetch).toHaveBeenCalledWith('/api/chat', expect.any(Object));
+    expect(global.fetch).toHaveBeenCalledWith('/api/ai/chat', expect.any(Object));
   });
 
   it('handles API errors gracefully', async () => {
     (global.fetch as any).mockResolvedValueOnce({
-      ok: false,
+      ok: true,
+      json: async () => ({}),
     });
 
-    render(<AiAssistant userScore={5.2} breakdown={null} />);
+    render(<AiAssistant scoreResult={mockScore} />);
     
-    const input = screen.getByPlaceholderText(/Ask about carbon footprint.../i);
+    const input = screen.getByPlaceholderText(/Ask local carbon advisor.../i);
     const sendBtn = screen.getByRole('button', { name: /Send Message/i });
 
     fireEvent.change(input, { target: { value: 'Hello' } });
     fireEvent.click(sendBtn);
 
     await waitFor(() => {
-      expect(screen.getByText(/Oops! I couldn't process that/i)).toBeInTheDocument();
+      expect(screen.getByText(/I apologize, I encountered a brief telemetry offline/i)).toBeInTheDocument();
     });
   });
 });

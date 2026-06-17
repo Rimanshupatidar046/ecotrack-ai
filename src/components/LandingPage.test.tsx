@@ -1,33 +1,49 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, it, expect, vi } from 'vitest';
 import LandingPage from './LandingPage';
 
 describe('LandingPage (Hero & Footer)', () => {
   it('renders the hero section correctly', () => {
-    const onEnterMock = vi.fn();
-    render(<LandingPage onEnter={onEnterMock} />);
+    const onStartCalcMock = vi.fn();
+    const onExploreMock = vi.fn();
+    render(<LandingPage onStartCalculator={onStartCalcMock} onExploreDashboard={onExploreMock} calculatorTaken={false} />);
     
     // Verify main headings exist
-    expect(screen.getByText(/Precision Climate Intelligence/i)).toBeInTheDocument();
-    expect(screen.getByText(/Calculate, Offset & Eliminate/i)).toBeInTheDocument();
+    expect(screen.getByText(/NEXT GENERATION CARBON INTELLIGENCE/i)).toBeInTheDocument();
+    expect(screen.getByText(/Track Your Carbon Footprint./i)).toBeInTheDocument();
   });
 
-  it('fires the onEnter callback when CTA is clicked', () => {
-    const onEnterMock = vi.fn();
-    render(<LandingPage onEnter={onEnterMock} />);
+  it('fires the onStartCalculator callback when CTA is clicked', () => {
+    const onStartCalcMock = vi.fn();
+    const onExploreMock = vi.fn();
+    render(<LandingPage onStartCalculator={onStartCalcMock} onExploreDashboard={onExploreMock} calculatorTaken={false} />);
     
     // Click the main CTA button
-    const ctaButton = screen.getByText('Launch ESG Workspace');
+    const ctaButton = screen.getByText('Calculate My Footprint');
     fireEvent.click(ctaButton);
     
-    expect(onEnterMock).toHaveBeenCalledTimes(1);
+    expect(onStartCalcMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('fires the onExploreDashboard callback when explore CTA is clicked', () => {
+    const onStartCalcMock = vi.fn();
+    const onExploreMock = vi.fn();
+    render(<LandingPage onStartCalculator={onStartCalcMock} onExploreDashboard={onExploreMock} calculatorTaken={true} />);
+    
+    // Click the explore button
+    const ctaButton = screen.getByText('Explore Dashboard');
+    fireEvent.click(ctaButton);
+    
+    expect(onExploreMock).toHaveBeenCalledTimes(1);
   });
 
   it('renders the footer with newsletter signup', () => {
-    render(<LandingPage onEnter={() => {}} />);
+    const onStartCalcMock = vi.fn();
+    const onExploreMock = vi.fn();
+    render(<LandingPage onStartCalculator={onStartCalcMock} onExploreDashboard={onExploreMock} calculatorTaken={false} />);
     
     // Verify footer text
-    expect(screen.getByText(/Subscribe to our climate intelligence newsletter/i)).toBeInTheDocument();
+    expect(screen.getByText(/Join 34,000\+ citizens receiving weekly climate optimization tips/i)).toBeInTheDocument();
     
     // Verify Newsletter input
     const newsletterInput = screen.getByPlaceholderText('Enter your email');

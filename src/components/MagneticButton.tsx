@@ -83,7 +83,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
     };
   }, [magneticStrength]);
 
-  const handlePointerDown = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const btn = btnRef.current;
     if (!btn) return;
 
@@ -108,7 +108,7 @@ export const MagneticButton: React.FC<MagneticButtonProps> = ({
   return (
     <button
       ref={btnRef}
-      onMouseDown={handlePointerDown}
+      onClick={handleClick}
       className={`relative overflow-hidden cursor-pointer select-none outline-none group transition-all duration-300 ${className}`}
       {...props}
     >

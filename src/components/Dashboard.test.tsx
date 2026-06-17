@@ -15,29 +15,28 @@ describe('Dashboard Component', () => {
       waste: 0.5
     },
     recommendations: [],
-    aiCommentary: 'Great job!',
   };
 
   it('renders the empty state if no result is provided', () => {
-    render(<Dashboard result={null} />);
-    expect(screen.getByText(/You haven't completed your baseline assessment yet/i)).toBeInTheDocument();
+    render(<Dashboard result={null} commentary="" />);
+    expect(screen.getByText(/No Emissions Profile Active/i)).toBeInTheDocument();
   });
 
   it('renders the analytics when a result is provided', () => {
-    render(<Dashboard result={mockResult} />);
+    render(<Dashboard result={mockResult} commentary="Great job!" />);
     
     // Check main KPI
     const scores = screen.getAllByText('4.5');
     expect(scores.length).toBeGreaterThan(0);
-    expect(screen.getByText('Tons CO2e / yr')).toBeInTheDocument();
+    expect(screen.getByText('Tons CO₂e/yr')).toBeInTheDocument();
     
     // Check breakdown categories
-    expect(screen.getByText('Transit Networks')).toBeInTheDocument();
-    expect(screen.getByText('Domestic Energy')).toBeInTheDocument();
-    expect(screen.getByText('Nutrition')).toBeInTheDocument();
-    expect(screen.getByText('Waste')).toBeInTheDocument();
+    expect(screen.getByText(/Transit Networks/i)).toBeInTheDocument();
+    expect(screen.getByText(/Thermodynamic Loads/i)).toBeInTheDocument();
+    expect(screen.getByText(/Nutrition Cycles/i)).toBeInTheDocument();
+    expect(screen.getByText(/Municipal Waste/i)).toBeInTheDocument();
     
     // Check AI Commentary exists
-    expect(screen.getByText('Great job!')).toBeInTheDocument();
+    expect(screen.getByText(/"Great job!"/i)).toBeInTheDocument();
   });
 });
