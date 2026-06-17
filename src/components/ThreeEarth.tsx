@@ -32,98 +32,40 @@ export default function ThreeEarth() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     container.appendChild(renderer.domElement);
 
-    // 2. Procedural Earth Texture (Instantly generated, 100% CORS safe & offline-proof)
-    const textureCanvas = document.createElement("canvas");
-    textureCanvas.width = 1024;
-    textureCanvas.height = 512;
-    const ctx = textureCanvas.getContext("2d", { willReadFrequently: true })!;
-
-    // Fills ocean
-    ctx.fillStyle = "#0c1d33"; // deep oceanic blue
-    ctx.fillRect(0, 0, 1024, 512);
-
-    // Drawing abstract clean lands (continents outline representation)
-    ctx.fillStyle = "#10b981"; // emerald carbon green
+    // 2. Realistic Earth Textures via CDN
+    const textureLoader = new THREE.TextureLoader();
     
-    // Draw some solid natural continent shapes
-    const drawLand = (x: number, y: number, r: number, points: number) => {
-      ctx.beginPath();
-      for (let i = 0; i < points; i++) {
-        const angle = (i / points) * Math.PI * 2;
-        const offset = (Math.sin(angle * 5) * 15 + Math.cos(angle * 3) * 10) * (r / 90);
-        const currR = r + offset;
-        const px = x + Math.cos(angle) * currR;
-        const py = y + Math.sin(angle) * currR * 0.8;
-        if (i === 0) ctx.moveTo(px, py);
-        else ctx.lineTo(px, py);
-      }
-      ctx.closePath();
-      ctx.fill();
-    };
-
-    // Draw Americas
-    drawLand(250, 240, 110, 24);
-    drawLand(320, 360, 95, 20);
-    drawLand(200, 140, 60, 15);
-    // Draw Eurasia and Africa
-    drawLand(650, 180, 140, 28);
-    drawLand(600, 320, 80, 18);
-    drawLand(780, 380, 50, 12); // Australia
-    drawLand(830, 200, 60, 14); // East islands
-    drawLand(550, 130, 35, 10); // UK/Nordic area
-
-    // Add high-tech digital grid dots overlay for a cool premium SaaS mood
-    ctx.fillStyle = "rgba(6, 182, 212, 0.35)"; // Cyan high-tech grid
-    for (let x = 0; x < 1024; x += 16) {
-      for (let y = 0; y < 512; y += 16) {
-        if (ctx.getImageData(x, y, 1, 1).data[1] === 185) { // land match (emerald G=185)
-          ctx.fillStyle = "rgba(167, 243, 208, 0.9)"; // bright green mint
-          ctx.fillRect(x, y - 1, 2, 2);
-        } else {
-          ctx.fillStyle = "rgba(6, 182, 212, 0.25)"; // dim cyan dot
-          ctx.fillRect(x, y - 1, 1.5, 1.5);
-        }
-      }
-    }
-
-    const earthTexture = new THREE.CanvasTexture(textureCanvas);
-
+    // High-res realistic maps
+    const earthTexture = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
+    const bumpMap = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-topology.png");
+    const waterMap = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-water.png");
+    
     // 3. Earth Globe Mesh
     const geometry = new THREE.SphereGeometry(2, 64, 64);
     
-    // Custom fine-tuned material
+    // Photorealistic material
     const material = new THREE.MeshPhongMaterial({
       map: earthTexture,
-      shininess: 45,
-      specular: new THREE.Color("#0e7490"), // cyan spec reflections
-      bumpScale: 0.15,
+      bumpMap: bumpMap,
+      bumpScale: 0.05,
+      specularMap: waterMap,
+      specular: new THREE.Color("#444444"),
+      shininess: 35,
     });
 
     const earth = new THREE.Mesh(geometry, material);
     scene.add(earth);
 
-    // 4. Cloud Layer
-    const cloudCanvas = document.createElement("canvas");
-    cloudCanvas.width = 512;
-    cloudCanvas.height = 256;
-    const cCtx = cloudCanvas.getContext("2d")!;
-    cCtx.clearRect(0, 0, 512, 256);
-    cCtx.fillStyle = "rgba(255, 255, 255, 0.45)";
-    // Random cloud arcs
-    for (let i = 0; i < 20; i++) {
-      const cx = Math.random() * 512;
-      const cy = 60 + Math.random() * 136;
-      cCtx.beginPath();
-      cCtx.ellipse(cx, cy, 30 + Math.random() * 70, 10 + Math.random() * 20, Math.random() * 0.4, 0, Math.PI * 2);
-      cCtx.fill();
-    }
-    const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
-    const cloudGeometry = new THREE.SphereGeometry(2.04, 32, 32);
-    const cloudMaterial = new THREE.MeshBasicMaterial({
+    // 4. Photorealistic Cloud Layer
+    const cloudTexture = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-clouds.png");
+    const cloudGeometry = new THREE.SphereGeometry(2.03, 64, 64);
+    const cloudMaterial = new THREE.MeshPhongMaterial({
       map: cloudTexture,
       transparent: true,
-      opacity: 0.5,
-      blending: THREE.AdditiveBlending
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending,
+      side: THREE.DoubleSide,
+      depthWrite: false,
     });
     const clouds = new THREE.Mesh(cloudGeometry, cloudMaterial);
     scene.add(clouds);

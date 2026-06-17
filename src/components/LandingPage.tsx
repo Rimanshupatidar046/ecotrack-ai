@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { Leaf, ShieldCheck, Cpu, Zap, Trophy, HelpCircle, ArrowRight, Star, Globe, Sparkles } from "lucide-react";
+import { Leaf, ShieldCheck, Cpu, Zap, Trophy, HelpCircle, ArrowRight, Star, Globe, Sparkles, Twitter, Linkedin, Github, Mail } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import ThreeEarth from "./ThreeEarth";
 import gsap from "gsap";
@@ -120,17 +120,20 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
     {
       quote: "EcoTrack AI completely gamified my household footprint. We cut our quarterly energy consumption by 24% and unlocked the 'Solar Vanguard' badge!",
       author: "Helena Vance",
-      role: "Climate Tech Architect, Munich"
+      role: "Climate Tech Architect, Munich",
+      avatar: "https://i.pravatar.cc/150?u=helena"
     },
     {
       quote: "The personalized report took our carbon metrics straight to our board proposal. The scientific backing and AI recommendation fidelity is outstanding.",
       author: "Marcus Thorne",
-      role: "ESG Director, Vanguard Group"
+      role: "ESG Director, Vanguard Group",
+      avatar: "https://i.pravatar.cc/150?u=marcus"
     },
     {
       quote: "A masterpiece of visual design. Having a realistic 3D global carbon telemetry feedback makes adjusting daily transport choices genuinely immersive.",
       author: "Sora Takahashi",
-      role: "Urban Ecology Researcher, Tokyo"
+      role: "Urban Ecology Researcher, Tokyo",
+      avatar: "https://i.pravatar.cc/150?u=sora"
     }
   ];
 
@@ -502,23 +505,24 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
               <motion.div key={idx} variants={fadeInUpItem}>
                 <AnimatedCard 
                   id={`testimonial-${idx}`}
-                  className="bg-white/5 border border-white/10 p-6 rounded-2xl h-full w-full"
+                  className="bg-white/5 border border-white/10 p-8 rounded-2xl h-full w-full relative overflow-hidden group"
                   glowColor="rgba(16, 185, 129, 0.15)"
                 >
-                  <div className="flex flex-col justify-between h-full space-y-6">
+                  <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
+                    <Star className="w-24 h-24 text-emerald-400" />
+                  </div>
+                  <div className="flex flex-col justify-between h-full space-y-6 relative z-10">
                     <div>
-                      <div className="flex space-x-1 mb-4 text-emerald-400">
+                      <div className="flex space-x-1 mb-6 text-emerald-400">
                         {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
                       </div>
-                      <p className="text-slate-300 text-sm italic leading-relaxed">"{t.quote}"</p>
+                      <p className="text-slate-300 text-base italic leading-relaxed">"{t.quote}"</p>
                     </div>
-                    <div className="pt-4 border-t border-white/10 flex items-center justify-between">
+                    <div className="pt-6 border-t border-white/10 flex items-center space-x-4">
+                      <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full border-2 border-emerald-500/50 object-cover shadow-lg shadow-emerald-500/20" />
                       <div>
                         <span className="block text-white text-sm font-bold">{t.author}</span>
-                        <span className="block text-slate-500 text-xs">{t.role}</span>
-                      </div>
-                      <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center border border-white/10 group-hover:bg-emerald-500/10 transition-colors">
-                        <Leaf className="w-4 h-4 text-emerald-400" />
+                        <span className="block text-emerald-400/80 font-mono text-xs mt-0.5">{t.role}</span>
                       </div>
                     </div>
                   </div>
@@ -616,19 +620,73 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
       </motion.section>
 
       {/* 9. Premium Footer */}
-      <footer className="bg-white/5 py-10 px-4 border-t border-white/10 text-center text-slate-500 text-xs font-mono backdrop-blur-md" id="landing-page-footer">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
-          <div className="flex items-center space-x-2">
-            <span className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">EcoTrack AI</span>
-            <span className="text-[10px] text-slate-400 border border-white/10 px-1.5 py-0.5 rounded">v1.2.0-beta</span>
+      <footer className="bg-[#050B14] py-16 px-4 border-t border-white/10 backdrop-blur-xl relative overflow-hidden" id="landing-page-footer">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent" />
+        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 relative z-10">
+          
+          <div className="space-y-4">
+            <div className="flex items-center space-x-2">
+              <span className="text-2xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">EcoTrack AI</span>
+              <span className="text-[10px] text-emerald-400 border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 rounded font-mono">v1.2.0</span>
+            </div>
+            <p className="text-slate-400 text-sm leading-relaxed max-w-xs">
+              Leading the transition to a carbon-neutral future through advanced environmental telemetry, AI-driven insights, and community action.
+            </p>
+            <div className="flex space-x-4 pt-2">
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-slate-400 hover:text-emerald-400 transition-all">
+                <Twitter className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all">
+                <Linkedin className="w-4 h-4" />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/20 hover:border-white/30 text-slate-400 hover:text-white transition-all">
+                <Github className="w-4 h-4" />
+              </a>
+            </div>
           </div>
+
           <div>
-            <span>© 2026 EcoTrack AI Corporation. Built with advanced climate-tech telemetry.</span>
+            <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Product</h4>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Carbon Calculator</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">AI Diagnostics</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Gamification Dashboard</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Enterprise API</a></li>
+            </ul>
           </div>
-          <div className="flex space-x-4 text-slate-400 font-sans font-medium">
-            <span className="hover:text-emerald-400 cursor-pointer transition-colors">IPCC Guidelines</span>
-            <span className="hover:text-emerald-400 cursor-pointer transition-colors">Privacy</span>
-            <span className="hover:text-emerald-400 cursor-pointer transition-colors">Terms of Use</span>
+
+          <div>
+            <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Resources</h4>
+            <ul className="space-y-3 text-sm text-slate-400">
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">IPCC Methodologies</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Climate Glossary</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Community Forum</a></li>
+              <li><a href="#" className="hover:text-emerald-400 transition-colors">Documentation</a></li>
+            </ul>
+          </div>
+
+          <div className="space-y-4">
+            <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Stay Updated</h4>
+            <p className="text-slate-400 text-sm">Join 34,000+ citizens receiving weekly climate optimization tips.</p>
+            <div className="relative">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
+              />
+              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-900 transition-colors">
+                <Mail className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 font-mono">
+          <p>© 2026 EcoTrack AI Corporation. All rights reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
           </div>
         </div>
       </footer>
