@@ -215,7 +215,7 @@ app.post("/api/ai/calculate", async (req, res) => {
         Provide a very engaging 2-3 sentence personalized review focusing directly on their highest contributor, praise their good segments and deliver a high impact, inspiring motivation to improve. Keep it inspiring, concrete, scientific yet completely friendly. No jargon.`;
 
         const aiResponse = await ai.models.generateContent({
-          model: "gemini-3.5-flash",
+          model: "gemini-1.5-flash",
           contents: prompt,
         });
 
@@ -315,7 +315,7 @@ app.post("/api/ai/chat", async (req, res) => {
     Current User Context: ${scoreCtx}`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-1.5-flash",
       contents: formattedContents,
       config: {
         systemInstruction: systemInstruction,

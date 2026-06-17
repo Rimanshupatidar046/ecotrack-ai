@@ -142,9 +142,9 @@ export default function App() {
       <header className="sticky top-0 z-50 border-b border-white/10 bg-white/5 backdrop-blur-md transition-all duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
           
-          <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setActiveView("landing")}>
+          <div className="flex items-center space-x-3 cursor-pointer group" onClick={() => setActiveView("landing")} role="button" aria-label="Go to EcoTrack AI Homepage" tabIndex={0} onKeyDown={(e) => e.key === 'Enter' && setActiveView("landing")}>
             <div className="w-10 h-10 bg-gradient-to-br from-[#10B981] to-[#3B82F6] rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20 group-hover:scale-105 transition-transform duration-300">
-              <Leaf className="w-5.5 h-5.5 text-white" strokeWidth={2.5} />
+              <Leaf className="w-5.5 h-5.5 text-white" strokeWidth={2.5} aria-hidden="true" />
             </div>
             <div>
               <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 to-blue-400">EcoTrack AI</span>
@@ -152,10 +152,11 @@ export default function App() {
             </div>
           </div>
 
-          <nav className="flex items-center space-x-3">
+          <nav aria-label="Main Navigation" className="flex items-center space-x-3">
             <button
               onClick={() => setActiveView("landing")}
               id="top-nav-landing-toggle"
+              aria-current={activeView === "landing" ? "page" : undefined}
               className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 ${
                 activeView === "landing"
                   ? "bg-white/10 border border-white/20 text-[#10B981]"
@@ -171,6 +172,7 @@ export default function App() {
                 if (scoreResult) setActiveTab("dashboard");
               }}
               id="top-nav-workspace-toggle"
+              aria-current={activeView === "app" ? "page" : undefined}
               className={`px-4 py-2 text-xs font-semibold rounded-xl transition-all duration-200 flex items-center space-x-1.5 ${
                 activeView === "app"
                   ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-300"
@@ -178,7 +180,7 @@ export default function App() {
               }`}
             >
               <span>Explore Workspace</span>
-              <ChevronRight className="w-3.5 h-3.5 text-emerald-400" />
+              <ChevronRight className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />
             </button>
 
             {/* Glassmorphic Points Pill */}
@@ -191,7 +193,7 @@ export default function App() {
       </header>
 
       {/* 2. Main Page Render Route */}
-      <main className="flex-1 relative z-10">
+      <main id="main-content" className="flex-1 relative z-10">
         {activeView === "landing" ? (
           <LandingPage 
             onStartCalculator={() => {
@@ -211,23 +213,25 @@ export default function App() {
         ) : (
           /* Premium Full-Stack Application Interface Workspace */
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8" id="sustainability-workspace-root">
+            <h1 className="sr-only">EcoTrack AI Workspace</h1>
             
             {/* Left Nav menu Column (Col Span 3) */}
-            <div className="lg:col-span-3 flex flex-col space-y-4" id="workspace-sidebar">
+            <aside aria-label="Workspace Navigation" className="lg:col-span-3 flex flex-col space-y-4" id="workspace-sidebar">
               
-              <div className="rounded-2xl p-4 space-y-1.5 glassmorphism shadow-xl">
-                <span className="text-[10px] text-slate-400 font-mono tracking-widest block mb-2 px-2">DIAGNOSTIC WORKSPACE</span>
+              <nav aria-label="Workspace Tools" className="rounded-2xl p-4 space-y-1.5 glassmorphism shadow-xl">
+                <h2 className="text-[10px] text-slate-400 font-mono tracking-widest block mb-2 px-2 uppercase m-0">Diagnostic Workspace</h2>
                 
                 <button
                   onClick={() => setActiveTab("calculator")}
                   id="tab-btn-calculator"
+                  aria-current={activeTab === "calculator" ? "page" : undefined}
                   className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center space-x-2.5 transition-all outline-none ${
                     activeTab === "calculator"
                       ? "bg-white/10 text-emerald-400 border border-white/20 shadow-md"
                       : "text-slate-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
-                  <Globe className="w-4 h-4 text-emerald-400" />
+                  <Globe className="w-4 h-4 text-emerald-400" aria-hidden="true" />
                   <span>Carbon Assessment</span>
                 </button>
 
@@ -235,7 +239,8 @@ export default function App() {
                   onClick={() => scoreResult && setActiveTab("dashboard")}
                   disabled={!scoreResult}
                   id="tab-btn-dashboard"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "dashboard" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     !scoreResult 
                       ? "opacity-30 cursor-not-allowed text-slate-600"
                       : activeTab === "dashboard"
@@ -244,17 +249,18 @@ export default function App() {
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <BarChart3 className="w-4 h-4" />
+                    <BarChart3 className="w-4 h-4" aria-hidden="true" />
                     <span>Analytics Dashboard</span>
                   </span>
-                  {scoreResult && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+                  {scoreResult && <Check className="w-3.5 h-3.5 text-emerald-400" aria-hidden="true" />}
                 </button>
 
                 <button
                   onClick={() => scoreResult && setActiveTab("recommendations")}
                   disabled={!scoreResult}
                   id="tab-btn-recommendations"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "recommendations" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     !scoreResult 
                       ? "opacity-30 cursor-not-allowed text-slate-600"
                       : activeTab === "recommendations"
@@ -263,7 +269,7 @@ export default function App() {
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <Compass className="w-4 h-4" />
+                    <Compass className="w-4 h-4" aria-hidden="true" />
                     <span>Commit Solutions</span>
                   </span>
                   {committedIds.length > 0 && (
@@ -276,14 +282,15 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab("gamification")}
                   id="tab-btn-gamification"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "gamification" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     activeTab === "gamification"
                       ? "bg-white/10 text-emerald-400 border border-white/20 shadow-md"
                       : "text-slate-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <Award className="w-4 h-4" />
+                    <Award className="w-4 h-4" aria-hidden="true" />
                     <span>Eco Missions</span>
                   </span>
                   <span className="text-[10px] font-mono font-bold text-emerald-400 bg-emerald-500/10 px-1.5 py-0.5 rounded border border-emerald-500/20">
@@ -294,14 +301,15 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab("roadmap")}
                   id="tab-btn-roadmap"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "roadmap" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     activeTab === "roadmap"
                       ? "bg-white/10 text-emerald-400 border border-white/20 shadow-md"
                       : "text-slate-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <Milestone className="w-4 h-4" />
+                    <Milestone className="w-4 h-4" aria-hidden="true" />
                     <span>Reduction Roadmap</span>
                   </span>
                 </button>
@@ -309,14 +317,15 @@ export default function App() {
                 <button
                   onClick={() => setActiveTab("assistant")}
                   id="tab-btn-assistant"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "assistant" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     activeTab === "assistant"
                       ? "bg-white/10 text-emerald-400 border border-white/20 shadow-md"
                       : "text-slate-300 hover:text-white hover:bg-white/5"
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <Bot className="w-4 h-4" />
+                    <Bot className="w-4 h-4" aria-hidden="true" />
                     <span>AI Chatbot Assistant</span>
                   </span>
                 </button>
@@ -325,7 +334,8 @@ export default function App() {
                   onClick={() => scoreResult && setActiveTab("report")}
                   disabled={!scoreResult}
                   id="tab-btn-report"
-                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none ${
+                  aria-current={activeTab === "report" ? "page" : undefined}
+                  className={`w-full p-2.5 rounded-xl text-xs font-bold text-left flex items-center justify-between transition-all outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     !scoreResult 
                       ? "opacity-30 cursor-not-allowed text-slate-600"
                       : activeTab === "report"
@@ -334,20 +344,21 @@ export default function App() {
                   }`}
                 >
                   <span className="flex items-center space-x-2.5">
-                    <FileText className="w-4 h-4" />
+                    <FileText className="w-4 h-4" aria-hidden="true" />
                     <span>Download ESG Reports</span>
                   </span>
                 </button>
 
-              </div>
+              </nav>
 
               {/* Weekly tips carousel widget */}
               <WeeklyTips />
 
-            </div>
+            </aside>
 
             {/* Right workspace Viewport Workspace (Col Span 9) */}
             <div className="lg:col-span-9" id="workspace-viewport">
+              <h2 className="sr-only">Active Workspace Tool</h2>
               {activeTab === "calculator" && (
                 <CarbonCalculator 
                   onCalculationComplete={handleCalculationComplete}

@@ -36,9 +36,9 @@ export default function ThreeEarth() {
     const textureLoader = new THREE.TextureLoader();
     
     // High-res realistic maps
-    const earthTexture = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-blue-marble.jpg");
-    const bumpMap = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-topology.png");
-    const waterMap = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-water.png");
+    const earthTexture = textureLoader.load("https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-blue-marble.jpg");
+    const bumpMap = textureLoader.load("https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-topology.png");
+    const waterMap = textureLoader.load("https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-water.png");
     
     // 3. Earth Globe Mesh
     const geometry = new THREE.SphereGeometry(2, 64, 64);
@@ -57,7 +57,7 @@ export default function ThreeEarth() {
     scene.add(earth);
 
     // 4. Photorealistic Cloud Layer
-    const cloudTexture = textureLoader.load("https://unpkg.com/three-globe/example/img/earth-clouds.png");
+    const cloudTexture = textureLoader.load("https://raw.githubusercontent.com/vasturiano/three-globe/master/example/img/earth-clouds.png");
     const cloudGeometry = new THREE.SphereGeometry(2.03, 64, 64);
     const cloudMaterial = new THREE.MeshPhongMaterial({
       map: cloudTexture,
@@ -345,7 +345,13 @@ export default function ThreeEarth() {
 
   return (
     <div className="relative w-full h-full min-h-[380px] md:min-h-[500px]" id="three-earth-canvas-container">
-      <div ref={containerRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
+      <div 
+        ref={containerRef} 
+        className="w-full h-full cursor-grab active:cursor-grabbing focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"
+        role="application"
+        aria-label="Interactive 3D Earth. Drag with mouse or swipe to rotate."
+        tabIndex={0}
+      />
       
       {/* Immersive subtle radar pulse indicator overlays */}
       <div className="absolute top-4 left-4 flex items-center space-x-2 bg-slate-900/45 backdrop-blur-md px-3 py-1.5 rounded-full border border-emerald-500/30 text-xs font-mono text-emerald-400 select-none pointer-events-none animate-pulse">

@@ -183,7 +183,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
     <div className="w-full text-[#E0E7FF] bg-transparent font-sans" id="landing-page-root">
       
       {/* 1. Immersive Hero Section */}
-      <section className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-12 px-4 sm:px-6 lg:px-8 border-b border-white/10">
+      <section aria-labelledby="hero-title" className="relative min-h-[92vh] flex items-center justify-center overflow-hidden py-12 px-4 sm:px-6 lg:px-8 border-b border-white/10">
         
         {/* Futuristic glowing circular blur gradients */}
         <div className="absolute top-1/4 left-1/4 -translate-y-1/2 -translate-x-1/2 w-96 h-96 rounded-full bg-emerald-500/10 blur-[120px] pointer-events-none" />
@@ -194,7 +194,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
           {/* Hero text reveal inputs */}
           <div className="lg:col-span-7 flex flex-col justify-center space-y-6 text-left">
             <div className="inline-flex items-center space-x-2 bg-white/5 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/25 text-xs font-mono text-emerald-400 w-fit gsap-reveal">
-              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" />
+              <Sparkles className="w-4 h-4 text-emerald-400 animate-spin" aria-hidden="true" />
               <span>NEXT GENERATION CARBON INTELLIGENCE</span>
             </div>
 
@@ -217,7 +217,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                 className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 hover:brightness-110 text-slate-950 font-bold rounded-xl transition-all shadow-lg shadow-emerald-500/10 active:scale-95"
               >
                 <span>Calculate My Footprint</span>
-                <ArrowRight className="w-5 h-5 text-slate-950" />
+                <ArrowRight className="w-5 h-5 text-slate-950" aria-hidden="true" />
               </MagneticButton>
 
               <MagneticButton
@@ -226,7 +226,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                 className="px-8 py-4 bg-white/5 hover:bg-white/10 text-white font-medium rounded-xl border border-white/10 transition-all active:scale-95 backdrop-blur-md"
               >
                 <span>Explore Dashboard</span>
-                <Globe className="w-5 h-5 text-cyan-400" />
+                <Globe className="w-5 h-5 text-cyan-400" aria-hidden="true" />
               </MagneticButton>
             </div>
 
@@ -710,16 +710,18 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
           </div>
 
           <div className="space-y-4">
-            <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Stay Updated</h4>
+            <h2 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Stay Updated</h2>
             <p className="text-slate-400 text-sm">Join 34,000+ citizens receiving weekly climate optimization tips.</p>
             <div className="relative">
+              <label htmlFor="newsletter-email" className="sr-only">Enter your email</label>
               <input 
+                id="newsletter-email"
                 type="email" 
                 placeholder="Enter your email" 
                 className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-4 pr-12 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/50 transition-all"
               />
-              <button className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-900 transition-colors">
-                <Mail className="w-4 h-4" />
+              <button aria-label="Subscribe to newsletter" className="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 flex items-center justify-center rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-900 transition-colors focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-1 focus-visible:ring-offset-[#050B14]">
+                <Mail className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
           </div>

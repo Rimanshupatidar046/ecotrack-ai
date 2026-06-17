@@ -4,7 +4,7 @@
  */
 
 import { EcoChallenge, AchievementBadge } from "../types";
-import { Trophy, Compass, Star, TreeDeciduous, CheckCircle2 } from "lucide-react";
+import { Trophy, Compass, Star, TreeDeciduous, CheckCircle2, Check } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimatedCard } from "./AnimatedCard";
 
@@ -69,7 +69,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
           </motion.div>
           <div>
             <span className="text-xs font-mono text-emerald-400 uppercase tracking-widest block font-bold">ECO CITIZEN STATUS</span>
-            <h4 className="text-xl font-extrabold text-white">Sustainability Level {level}</h4>
+            <h2 className="text-xl font-extrabold text-white">Sustainability Level {level}</h2>
             <p className="text-xs text-slate-400">Claim XP milestones by checking daily or weekly tasks</p>
           </div>
         </div>
@@ -99,10 +99,10 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
         
         <div className="border-b border-white/10 pb-4 mb-4 flex items-center justify-between">
           <div>
-            <h3 className="text-base font-bold text-white flex items-center space-x-2">
+            <h2 className="text-base font-bold text-white flex items-center space-x-2">
               <Compass className="w-5 h-5 text-emerald-400" />
               <span>Active Eco Challenges & Missions</span>
-            </h3>
+            </h2>
             <p className="text-[11px] text-slate-400">Complete standard physical tasks to register carbon points</p>
           </div>
           <div className="bg-white/5 border border-white/10 px-3 py-1 rounded-lg text-xs font-mono text-emerald-400 font-bold">
@@ -127,7 +127,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
                   <TreeDeciduous className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className={`text-sm font-bold ${task.completed ? "line-through text-slate-505" : "text-white"}`}>{task.title}</h4>
+                  <h3 className={`text-sm font-bold ${task.completed ? "line-through text-slate-505" : "text-white"}`}>{task.title}</h3>
                   <p className="text-[11px] text-slate-400">{task.description}</p>
                 </div>
               </div>
@@ -136,19 +136,17 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
                 <button
                   disabled={task.completed}
                   onClick={() => onCompleteChallenge(task.id, task.points)}
-                  className={`px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer outline-none ${
+                  aria-label={task.completed ? "Mission Completed" : "Complete Mission"}
+                  className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                     task.completed 
                       ? "text-emerald-400 bg-emerald-500/10 border border-emerald-500/25" 
                       : "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:brightness-105 active:scale-95"
                   }`}
                 >
                   {task.completed ? (
-                    <span className="flex items-center space-x-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Earned</span>
-                    </span>
+                      <CheckCircle2 className="w-5 h-5" />
                   ) : (
-                    <span>+{task.points} pts</span>
+                    <span className="text-[10px] font-bold">+{task.points}</span>
                   )}
                 </button>
               </div>
@@ -167,7 +165,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
         <div className="border-b border-white/10 pb-4 mb-4 flex items-center space-x-2">
           <Trophy className="w-5 h-5 text-emerald-400 animate-bounce" />
           <div>
-            <h3 className="text-base font-bold text-white">Earned Badges & Ribbons</h3>
+            <h2 className="text-base font-bold text-white">Earned Badges & Ribbons</h2>
             <p className="text-[11px] text-slate-400">Unlock awards based on carbon reductions</p>
           </div>
         </div>
@@ -195,7 +193,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
                     ? "bg-emerald-500/10 border-emerald-400 text-emerald-400" 
                     : "bg-white/5 border-white/10 text-slate-600"
                 }`}>
-                  <Star className="w-5 h-5" />
+                  <Check className="w-5 h-5" aria-hidden="true" />
                 </div>
 
                 <div>

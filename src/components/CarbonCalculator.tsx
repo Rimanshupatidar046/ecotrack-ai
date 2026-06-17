@@ -175,8 +175,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
 
                   {/* Public Transport intensity level */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-300 block mb-1">Public Transit Integration</label>
-                    <div className="grid grid-cols-4 gap-2">
+                    <label id="publicTransportLabel" className="text-sm font-semibold text-slate-300 block mb-1">Public Transit Integration</label>
+                    <div role="group" aria-labelledby="publicTransportLabel" className="grid grid-cols-4 gap-2">
                       {[
                         { val: "none", label: "Zero Usage" },
                         { val: "low", label: "Occasional" },
@@ -186,6 +186,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                         <button
                           key={lvl.val}
                           type="button"
+                          role="radio"
+                          aria-checked={inputs.publicTransport === lvl.val}
                           onClick={() => handleInputChange("publicTransport", lvl.val)}
                           className={`py-3.5 rounded-xl text-xs font-bold text-center border transition-all duration-300 outline-none cursor-pointer ${
                             inputs.publicTransport === lvl.val
@@ -293,7 +295,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                   <span>Nutrition Habits & Agrisect Intensity</span>
                 </h3>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+                <div role="group" aria-label="Diet Selection" className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                   {[
                     {
                       id: "vegan",
@@ -317,6 +319,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                     <button
                       key={diet.id}
                       type="button"
+                      role="radio"
+                      aria-checked={inputs.diet === diet.id}
                       onClick={() => handleInputChange("diet", diet.id)}
                       className={`p-5 rounded-2xl border text-left flex flex-col justify-between transition-all duration-300 outline-none cursor-pointer group hover:scale-[1.03] ${
                         inputs.diet === diet.id
@@ -347,8 +351,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                   
                   {/* Plastic reliance */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-300 block mb-1">Plastic Packaging Dependency</label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <label id="plasticLevelLabel" className="text-sm font-semibold text-slate-300 block mb-1">Plastic Packaging Dependency</label>
+                    <div role="group" aria-labelledby="plasticLevelLabel" className="grid grid-cols-3 gap-2">
                       {[
                         { id: "low", label: "Conscious Low" },
                         { id: "medium", label: "Standard Moderate" },
@@ -357,6 +361,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                         <button
                           key={item.id}
                           type="button"
+                          role="radio"
+                          aria-checked={inputs.plasticLevel === item.id}
                           onClick={() => handleInputChange("plasticLevel", item.id)}
                           className={`py-3 rounded-xl text-xs font-bold text-center border transition-all duration-350 outline-none cursor-pointer ${
                             inputs.plasticLevel === item.id
@@ -372,8 +378,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
 
                   {/* Recycling Habits */}
                   <div className="space-y-2">
-                    <label className="text-sm font-semibold text-slate-300 block mb-1">Recycling Habits (Sorting Ratios)</label>
-                    <div className="grid grid-cols-3 gap-2">
+                    <label id="recyclingHabitsLabel" className="text-sm font-semibold text-slate-300 block mb-1">Recycling Habits (Sorting Ratios)</label>
+                    <div role="group" aria-labelledby="recyclingHabitsLabel" className="grid grid-cols-3 gap-2">
                       {[
                         { id: "none", label: "Send to Trash" },
                         { id: "some", label: "Basic Sorting" },
@@ -382,6 +388,8 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                         <button
                           key={item.id}
                           type="button"
+                          role="radio"
+                          aria-checked={inputs.recyclingHabits === item.id}
                           onClick={() => handleInputChange("recyclingHabits", item.id)}
                           className={`py-3 rounded-xl text-xs font-bold text-center border transition-all duration-350 outline-none cursor-pointer ${
                             inputs.recyclingHabits === item.id

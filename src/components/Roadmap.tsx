@@ -49,7 +49,7 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
         <div className="space-y-1">
           <span className="text-emerald-400 font-mono text-xs tracking-widest block font-bold">NET ZERO TARGET PATHWAYS</span>
           <h3 className="text-lg font-bold text-white flex items-center space-x-2">
-            <Milestone className="w-5 h-5 text-emerald-400" />
+            <Milestone className="w-5 h-5 text-emerald-400" aria-hidden="true" />
             <span>Carbon Reduction Roadmap Milestones</span>
           </h3>
           <p className="text-xs text-slate-400">Track milestones across Short-term, Mid-term and Long-term target dates</p>
@@ -85,10 +85,11 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
               
               <div className="space-y-3">
                 {milestones.filter(m => m.timeframe === "Short-term").map((m) => (
-                  <motion.div 
+                  <motion.button 
                     key={m.id}
                     onClick={() => onToggleMilestone(m.id)}
-                    className={`p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left ${
+                    aria-pressed={m.achieved}
+                    className={`w-full p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                       m.achieved 
                         ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-300 shadow-md" 
                         : "bg-white/5 border-white/5 text-slate-400 hover:border-white/15 hover:bg-white/10"
@@ -97,14 +98,14 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex items-start space-x-2.5">
-                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-650"}`} />
+                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-650"}`} aria-hidden="true" />
                       <div>
                         <h4 className="text-xs font-bold text-white leading-normal">{m.title}</h4>
                         <p className="text-[10px] text-slate-400 leading-normal pt-1">{m.description}</p>
                         <span className="text-[8px] font-mono mt-2 inline-block text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded bg-black/30 font-bold">{m.savingsKg} kg offset</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -125,10 +126,11 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
 
               <div className="space-y-3">
                 {milestones.filter(m => m.timeframe === "Mid-term").map((m) => (
-                  <motion.div 
+                  <motion.button 
                     key={m.id}
                     onClick={() => onToggleMilestone(m.id)}
-                    className={`p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left ${
+                    aria-pressed={m.achieved}
+                    className={`w-full p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                       m.achieved 
                         ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-300 shadow-md" 
                         : "bg-white/5 border-white/5 text-slate-400 hover:border-white/15 hover:bg-white/10"
@@ -137,14 +139,14 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex items-start space-x-2.5">
-                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-655"}`} />
+                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-655"}`} aria-hidden="true" />
                       <div>
                         <h4 className="text-xs font-bold text-white leading-normal">{m.title}</h4>
                         <p className="text-[10px] text-slate-400 leading-normal pt-1">{m.description}</p>
                         <span className="text-[8px] font-mono mt-2 inline-block text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded bg-black/30 font-bold">{m.savingsKg} kg offset</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
             </div>
@@ -165,10 +167,11 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
 
               <div className="space-y-3">
                 {milestones.filter(m => m.timeframe === "Long-term").map((m) => (
-                  <motion.div 
+                  <motion.button 
                     key={m.id}
                     onClick={() => onToggleMilestone(m.id)}
-                    className={`p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left ${
+                    aria-pressed={m.achieved}
+                    className={`w-full p-3.5 rounded-xl border cursor-pointer transition-all outline-none text-left focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                       m.achieved 
                         ? "bg-emerald-500/10 border-emerald-500/35 text-emerald-300 shadow-md" 
                         : "bg-white/5 border-white/5 text-slate-400 hover:border-white/15 hover:bg-white/10"
@@ -177,14 +180,14 @@ export default function Roadmap({ milestones, onToggleMilestone }: RoadmapProps)
                     whileHover={{ scale: 1.02 }}
                   >
                     <div className="flex items-start space-x-2.5">
-                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-655"}`} />
+                      <CheckCircle2 className={`w-4.5 h-4.5 flex-shrink-0 mt-0.5 ${m.achieved ? "text-emerald-405" : "text-slate-655"}`} aria-hidden="true" />
                       <div>
                         <h4 className="text-xs font-bold text-white leading-normal">{m.title}</h4>
                         <p className="text-[10px] text-slate-400 leading-normal pt-1">{m.description}</p>
                         <span className="text-[8px] font-mono mt-2 inline-block text-emerald-400 border border-emerald-500/20 px-1.5 py-0.5 rounded bg-black/30 font-bold">{m.savingsKg} kg offset</span>
                       </div>
                     </div>
-                  </motion.div>
+                  </motion.button>
                 ))}
               </div>
             </div>

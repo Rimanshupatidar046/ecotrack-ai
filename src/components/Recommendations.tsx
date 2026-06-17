@@ -49,7 +49,8 @@ export default function Recommendations({ recommendations, onCommitRecommendatio
             <button
               key={c.id}
               onClick={() => setActiveTab(c.id)}
-              className={`relative px-4 py-2 text-xs font-bold rounded-xl transition-all duration-300 border outline-none cursor-pointer ${
+              aria-pressed={isActive}
+              className={`relative px-4 py-2 text-xs font-bold rounded-xl transition-all duration-300 border outline-none cursor-pointer focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                 isActive
                   ? "border-emerald-500/40 text-emerald-400 font-extrabold"
                   : "bg-white/5 border-white/10 text-slate-400 hover:border-white/20 hover:bg-white/10"
@@ -108,9 +109,9 @@ export default function Recommendations({ recommendations, onCommitRecommendatio
 
                       {/* Title & info */}
                       <div className="space-y-2 mb-4">
-                        <h4 className="text-lg font-bold text-white flex items-center space-x-2">
+                        <h3 className="text-lg font-bold text-white flex items-center space-x-2">
                           <span>{rec.title}</span>
-                        </h4>
+                        </h3>
                         <p className="text-xs text-slate-400 leading-relaxed font-sans">{rec.description}</p>
                       </div>
                     </div>
@@ -125,7 +126,7 @@ export default function Recommendations({ recommendations, onCommitRecommendatio
                         <div>
                           <span className="block text-[10px] uppercase tracking-wider text-slate-500 font-mono">Quarterly Savings</span>
                           <span className="text-base font-bold text-white font-mono flex items-center">
-                            <DollarSign className="w-3.5 h-3.5 text-emerald-400 inline" />
+                            <DollarSign className="w-3.5 h-3.5 text-emerald-400 inline" aria-hidden="true" />
                             <span>+{rec.financialSavings} / yr</span>
                           </span>
                         </div>
@@ -141,13 +142,14 @@ export default function Recommendations({ recommendations, onCommitRecommendatio
                           type="button"
                           onClick={() => onCommitRecommendation(rec.id, rec.co2Reduction, rec.financialSavings)}
                           disabled={isCommitted}
-                          className={`px-4 py-2.5 rounded-lg text-[11px] font-bold transition-all active:scale-95 flex items-center space-x-1.5 cursor-pointer outline-none ${
+                          aria-label={isCommitted ? "Recommendation Committed" : "Commit to Recommendation"}
+                          className={`px-4 py-2.5 rounded-lg text-[11px] font-bold transition-all active:scale-95 flex items-center space-x-1.5 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-emerald-500 ${
                             isCommitted
                               ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 cursor-not-allowed"
                               : "bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 hover:brightness-105"
                           }`}
                         >
-                          <Check className="w-3.5 h-3.5 text-slate-950" strokeWidth={3} />
+                          <Check className="w-3.5 h-3.5 text-slate-950" strokeWidth={3} aria-hidden="true" />
                           <span className="text-slate-950">{isCommitted ? "Committed" : "Commit Action"}</span>
                         </button>
                       </div>

@@ -85,7 +85,7 @@ export default function AiAssistant({ scoreResult }: AiAssistantProps) {
       <div className="border-b border-white/10 pb-3 mb-4 flex items-center justify-between">
         <div className="flex items-center space-x-2.5">
           <div className="bg-emerald-500/10 p-2 rounded-xl border border-emerald-500/20 text-emerald-400">
-            <Bot className="w-5 h-5" />
+            <Bot className="w-5 h-5" aria-hidden="true" />
           </div>
           <div>
             <h3 className="text-sm font-bold text-white flex items-center gap-1.5">
@@ -104,7 +104,7 @@ export default function AiAssistant({ scoreResult }: AiAssistantProps) {
       </div>
 
       {/* 2. Chat history pane with AnimatePresence */}
-      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1 scrollbar-thin scrollbar-thumb-white/5 text-left" id="chat-scroller">
+      <div className="flex-1 overflow-y-auto space-y-4 mb-4 pr-1 scrollbar-thin scrollbar-thumb-white/5 text-left" id="chat-scroller" aria-live="polite" aria-atomic="false">
         
         <AnimatePresence initial={false}>
           {messages.map((m, idx) => (
@@ -174,7 +174,9 @@ export default function AiAssistant({ scoreResult }: AiAssistantProps) {
 
       {/* 4. Chat interactive bar */}
       <div className="flex items-center space-x-2 bg-white/5 p-2.5 rounded-xl border border-white/10">
+        <label htmlFor="ai-chat-input" className="sr-only">Type a message to your AI Assistant</label>
         <input
+          id="ai-chat-input"
           type="text"
           value={inputVal}
           onChange={(e) => setInputVal(e.target.value)}
@@ -186,9 +188,10 @@ export default function AiAssistant({ scoreResult }: AiAssistantProps) {
           type="button"
           onClick={() => handleSendMessage(inputVal)}
           disabled={isLoading || !inputVal.trim()}
-          className="bg-emerald-500 hover:brightness-105 active:scale-95 text-slate-950 p-2 rounded-lg font-bold flex items-center justify-center transition-all disabled:opacity-40 cursor-pointer outline-none shadow-md shadow-emerald-500/10"
+          aria-label="Send Message"
+          className="bg-emerald-500 hover:brightness-105 active:scale-95 text-slate-950 p-2 rounded-lg font-bold flex items-center justify-center transition-all disabled:opacity-40 cursor-pointer outline-none shadow-md shadow-emerald-500/10 focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-offset-1 focus-visible:ring-offset-[#050B14]"
         >
-          <Send className="w-4 h-4 text-slate-950" />
+          <Send className="w-4 h-4 text-slate-950" aria-hidden="true" />
         </button>
       </div>
 

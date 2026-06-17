@@ -52,3 +52,15 @@ body {
 .animate-ripple {
   animation: ripple 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards;
 }
+
+/* Accessibility: Global Focus Styles */
+*:focus-visible {
+  outline: 2px solid #10B981;
+  outline-offset: 2px;
+  border-radius: inherit;
+}
+
+/* Hide focus rings from mouse clicks if supported */
+:focus:not(:focus-visible) {
+  outline: none;
+}
