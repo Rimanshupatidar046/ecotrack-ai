@@ -4,12 +4,12 @@
  */
 
 import { useState } from "react";
-import { CalculatorInputs } from "../types";
-import { Car, Zap, Leaf, Trash2, CheckCircle2, ArrowLeft, ArrowRight, Sparkles, Sun, Plane } from "lucide-react";
+import { CalculatorInputs, CalculationResult } from "../types";
+import { Car, Zap, Leaf, Trash2, ArrowLeft, ArrowRight, Sparkles, Sun } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 interface CarbonCalculatorProps {
-  onCalculationComplete: (result: any) => void;
+  onCalculationComplete: (result: CalculationResult) => void;
   isLoading: boolean;
   setIsLoading: (val: boolean) => void;
 }
@@ -32,7 +32,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
   const [inputs, setInputs] = useState<CalculatorInputs>(DEFAULT_INPUTS);
   const [activeStep, setActiveStep] = useState<number>(0); // 0: Transport, 1: Energy, 2: Diet, 3: Waste
 
-  const handleInputChange = (field: keyof CalculatorInputs, value: any) => {
+  const handleInputChange = (field: keyof CalculatorInputs, value: string | number) => {
     setInputs((prev) => ({ ...prev, [field]: value }));
   };
 
@@ -134,7 +134,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
             {activeStep === 0 && (
               <div className="space-y-6">
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Car className="w-5 h-5 text-emerald-400" />
+                  <Car className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
                   <span>Transportation Metrics</span>
                 </h3>
                 
@@ -175,7 +175,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
 
                   {/* Public Transport intensity level */}
                   <div className="space-y-2">
-                    <label id="publicTransportLabel" className="text-sm font-semibold text-slate-300 block mb-1">Public Transit Integration</label>
+                    <span id="publicTransportLabel" className="text-sm font-semibold text-slate-300 block mb-1">Public Transit Integration</span>
                     <div role="group" aria-labelledby="publicTransportLabel" className="grid grid-cols-4 gap-2">
                       {[
                         { val: "none", label: "Zero Usage" },
@@ -225,7 +225,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
             {activeStep === 1 && (
               <div className="space-y-6">
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-emerald-400" />
+                  <Zap className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
                   <span>Electricity & AC Thermodynamics</span>
                 </h3>
 
@@ -268,7 +268,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                   <div className="space-y-2 md:col-span-2">
                     <div className="flex justify-between items-center text-sm font-semibold">
                       <div className="flex items-center space-x-2">
-                        <Sun className="w-4 h-4 text-emerald-400" />
+                        <Sun className="w-4 h-4 text-emerald-400"  aria-hidden="true" />
                         <label htmlFor="renewablePct" className="text-slate-300">Renewable Input Ratio</label>
                       </div>
                       <span className="text-cyan-400 font-mono text-xs font-bold">{inputs.renewablePct}% offsets</span>
@@ -291,7 +291,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
             {activeStep === 2 && (
               <div className="space-y-6">
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Leaf className="w-5 h-5 text-emerald-400" />
+                  <Leaf className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
                   <span>Nutrition Habits & Agrisect Intensity</span>
                 </h3>
 
@@ -343,7 +343,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
             {activeStep === 3 && (
               <div className="space-y-6">
                 <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Trash2 className="w-5 h-5 text-emerald-400" />
+                  <Trash2 className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
                   <span>Circular Post-Consumer Recycling & Waste Loops</span>
                 </h3>
 
@@ -351,7 +351,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
                   
                   {/* Plastic reliance */}
                   <div className="space-y-2">
-                    <label id="plasticLevelLabel" className="text-sm font-semibold text-slate-300 block mb-1">Plastic Packaging Dependency</label>
+                    <span id="plasticLevelLabel" className="text-sm font-semibold text-slate-300 block mb-1">Plastic Packaging Dependency</span>
                     <div role="group" aria-labelledby="plasticLevelLabel" className="grid grid-cols-3 gap-2">
                       {[
                         { id: "low", label: "Conscious Low" },
@@ -378,7 +378,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
 
                   {/* Recycling Habits */}
                   <div className="space-y-2">
-                    <label id="recyclingHabitsLabel" className="text-sm font-semibold text-slate-300 block mb-1">Recycling Habits (Sorting Ratios)</label>
+                    <span id="recyclingHabitsLabel" className="text-sm font-semibold text-slate-300 block mb-1">Recycling Habits (Sorting Ratios)</span>
                     <div role="group" aria-labelledby="recyclingHabitsLabel" className="grid grid-cols-3 gap-2">
                       {[
                         { id: "none", label: "Send to Trash" },
@@ -438,7 +438,7 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
               : "border-white/10 text-slate-300 bg-white/5 hover:bg-white/10"
           }`}
         >
-          <ArrowLeft className="w-4 h-4" />
+          <ArrowLeft className="w-4 h-4"  aria-hidden="true" />
           <span>Previous Step</span>
         </button>
 
@@ -454,13 +454,13 @@ export default function CarbonCalculator({ onCalculationComplete, isLoading, set
             </>
           ) : activeStep === 3 ? (
             <>
-              <Sparkles className="w-4 h-4 text-slate-950 animate-bounce" />
+              <Sparkles className="w-4 h-4 text-slate-950 animate-bounce"  aria-hidden="true" />
               <span>Calculate Carbon Profile</span>
             </>
           ) : (
             <>
               <span>Next Parameter</span>
-              <ArrowRight className="w-4 h-4 text-slate-950" />
+              <ArrowRight className="w-4 h-4 text-slate-950"  aria-hidden="true" />
             </>
           )}
         </button>

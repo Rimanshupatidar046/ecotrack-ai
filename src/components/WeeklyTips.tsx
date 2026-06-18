@@ -54,7 +54,7 @@ export default function WeeklyTips() {
       
       <div className="flex justify-between items-center pb-3 border-b border-white/10 mb-4 text-xs font-mono">
         <span className="text-emerald-400 font-bold uppercase tracking-widest flex items-center space-x-1.5">
-          <Zap className="w-3.5 h-3.5 text-emerald-400" />
+          <Zap className="w-3.5 h-3.5 text-emerald-400"  aria-hidden="true" />
           <span>WEEKLY ECO TIP METRIC</span>
         </span>
         <span className="text-slate-500">{currentIndex + 1} / {tips.length}</span>
@@ -92,14 +92,14 @@ export default function WeeklyTips() {
               onClick={handlePrev}
               className="p-1 rounded bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer outline-none"
             >
-              <ChevronLeft className="w-3.5 h-3.5" />
+              <ChevronLeft className="w-3.5 h-3.5"  aria-hidden="true" />
             </button>
             <button 
               type="button"
               onClick={handleNext}
               className="p-1 rounded bg-white/5 border border-white/10 hover:border-white/20 hover:bg-white/10 text-slate-400 hover:text-white transition-colors cursor-pointer outline-none"
             >
-              <ChevronRight className="w-3.5 h-3.5" />
+              <ChevronRight className="w-3.5 h-3.5"  aria-hidden="true" />
             </button>
           </div>
         </div>

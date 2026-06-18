@@ -116,7 +116,6 @@ app.post("/api/ai/calculate", async (req, res) => {
 
     const {
       carKm = 0,
-      bikeKm = 0,
       publicTransport = "none",
       flightsYear = 0,
       electricityKwh = 0,
@@ -333,39 +332,43 @@ app.post("/api/ai/chat", async (req, res) => {
 // VITE OR STATIC FILE MIDDLEWARE
 // ----------------------------------------------------------------------
 
-if (process.env.NODE_ENV !== "production") {
-  createViteServer({
-    server: { middlewareMode: true },
-    appType: "spa",
-  }).then((vite) => {
-    app.use(vite.middlewares);
-    
-    // Fallback index.html router for SPA
-    app.get("*", (req, res, next) => {
-      // Do not catch API paths
-      if (req.path.startsWith("/api/")) return next();
+if (process.env.NODE_ENV !== "test") {
+  if (process.env.NODE_ENV !== "production") {
+    createViteServer({
+      server: { middlewareMode: true },
+      appType: "spa",
+    }).then((vite) => {
+      app.use(vite.middlewares);
       
-      const indexHtml = path.resolve(process.cwd(), "index.html");
-      vite.transformIndexHtml(req.originalUrl, req.path).then((html) => {
-        res.status(200).set({ "Content-Type": "text/html" }).end(html);
-      }).catch(next);
+      // Fallback index.html router for SPA
+      app.get("*", (req, res, next) => {
+        // Do not catch API paths
+        if (req.path.startsWith("/api/")) return next();
+        
+        vite.transformIndexHtml(req.originalUrl, req.path).then((html) => {
+          res.status(200).set({ "Content-Type": "text/html" }).end(html);
+        }).catch(next);
+      });
+      
+      app.listen(PORT, "0.0.0.0", () => {
+        console.log(`[EcoTrack Dev] Active on http://0.0.0.0:${PORT}`);
+      });
     });
+  } else {
+    // Serve production bundled folder
+    const distPath = path.join(process.cwd(), "dist");
+    app.use(express.static(distPath));
     
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`[EcoTrack Dev] Active on http://0.0.0.0:${PORT}`);
+    app.get("*", (req, res, next) => {
+      if (req.path.startsWith("/api/")) return next();
+      res.sendFile(path.resolve(distPath, "index.html"));
     });
-  });
-} else {
-  // Serve production bundled folder
-  const distPath = path.join(process.cwd(), "dist");
-  app.use(express.static(distPath));
-  
-  app.get("*", (req, res, next) => {
-    if (req.path.startsWith("/api/")) return next();
-    res.sendFile(path.resolve(distPath, "index.html"));
-  });
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`[EcoTrack Prod] Service running on port ${PORT}`);
-  });
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`[EcoTrack Prod] Service running on port ${PORT}`);
+    });
+  }
 }
+
+export { app };
+

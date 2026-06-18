@@ -13,7 +13,7 @@ interface ReportExportProps {
   inputs?: CalculatorInputs;
 }
 
-export default function ReportExport({ scoreResult, inputs }: ReportExportProps) {
+export default function ReportExport({ scoreResult }: ReportExportProps) {
   const [downloading, setDownloading] = useState(false);
 
   // Generate a random stable audit reference number
@@ -96,7 +96,7 @@ Protecting Planetary Ecosystem Metrics
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 border-b border-white/10 pb-5">
         <div>
           <h3 className="text-base font-bold text-white flex items-center space-x-2">
-            <FileText className="w-5 h-5 text-emerald-400" />
+            <FileText className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
             <span>Generate ESG Compliance Assessment</span>
           </h3>
           <p className="text-xs text-slate-400">Compile your metrics into an premium downloadable text sheet or printable layout</p>
@@ -109,7 +109,7 @@ Protecting Planetary Ecosystem Metrics
             className="p-2.5 hover:bg-white/10 border border-white/10 rounded-xl text-slate-400 hover:text-white transition-colors cursor-pointer outline-none"
             title="Print assessment document"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-4 h-4"  aria-hidden="true" />
           </button>
 
           <button
@@ -121,7 +121,7 @@ Protecting Planetary Ecosystem Metrics
             {downloading ? (
               <div className="w-3.5 h-3.5 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
             ) : (
-              <Download className="w-3.5 h-3.5 text-slate-950" />
+              <Download className="w-3.5 h-3.5 text-slate-950"  aria-hidden="true" />
             )}
             <span>Export ESG Report (.txt)</span>
           </button>

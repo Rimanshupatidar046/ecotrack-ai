@@ -21,7 +21,7 @@ interface LandingPageProps {
   calculatorTaken: boolean;
 }
 
-export default function LandingPage({ onStartCalculator, onExploreDashboard, calculatorTaken }: LandingPageProps) {
+export default function LandingPage({ onStartCalculator, onExploreDashboard }: LandingPageProps) {
   const [activeFaq, setActiveFaq] = useState<number | null>(null);
   
   // GSAP animation refs
@@ -426,7 +426,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
               <div className="space-y-4 pt-4 text-left">
                 {["100% offline-first secure caching", "Carbon-saving roadmap timeline generation", "Interactive PDF compliance metrics generator"].map((check, idx) => (
                   <div key={idx} className="flex items-center space-x-3 text-slate-300 text-sm">
-                    <ShieldCheck className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <ShieldCheck className="w-5 h-5 text-emerald-400 flex-shrink-0"  aria-hidden="true" />
                     <span>{check}</span>
                   </div>
                 ))}
@@ -503,7 +503,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                 </div>
                 <div className="p-8 flex-grow">
                   <h3 className="text-lg font-bold text-emerald-300 mb-3 flex items-center space-x-2.5">
-                    <Leaf className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <Leaf className="w-5 h-5 text-emerald-400 flex-shrink-0"  aria-hidden="true" />
                     <span>{benefit.title}</span>
                   </h3>
                   <p className="text-sm text-slate-400 leading-relaxed">{benefit.detail}</p>
@@ -544,12 +544,12 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                   glowColor="rgba(16, 185, 129, 0.15)"
                 >
                   <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                    <Star className="w-24 h-24 text-emerald-400" />
+                    <Star className="w-24 h-24 text-emerald-400"  aria-hidden="true" />
                   </div>
                   <div className="flex flex-col justify-between h-full space-y-6 relative z-10">
                     <div>
                       <div className="flex space-x-1 mb-6 text-emerald-400">
-                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current" />)}
+                        {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-current"  aria-hidden="true" />)}
                       </div>
                       <p className="text-slate-300 text-base italic leading-relaxed">"{t.quote}"</p>
                     </div>
@@ -596,7 +596,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
                   className="w-full px-6 py-4 flex items-center justify-between text-left focus:outline-none hover:bg-white/10 transition-colors relative"
                 >
                   <span className="font-bold text-white text-sm md:text-base flex items-center space-x-3">
-                    <HelpCircle className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <HelpCircle className="w-5 h-5 text-emerald-400 flex-shrink-0"  aria-hidden="true" />
                     <span>{faq.q}</span>
                   </span>
                   <motion.span 
@@ -677,14 +677,14 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
               Leading the transition to a carbon-neutral future through advanced environmental telemetry, AI-driven insights, and community action.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-slate-400 hover:text-emerald-400 transition-all">
-                <Twitter className="w-4 h-4" />
+              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-slate-400 hover:text-emerald-400 transition-all">
+                <Twitter className="w-4 h-4"  aria-hidden="true" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all">
-                <Linkedin className="w-4 h-4" />
+              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all">
+                <Linkedin className="w-4 h-4"  aria-hidden="true" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/20 hover:border-white/30 text-slate-400 hover:text-white transition-all">
-                <Github className="w-4 h-4" />
+              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/20 hover:border-white/30 text-slate-400 hover:text-white transition-all">
+                <Github className="w-4 h-4"  aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -692,20 +692,20 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
           <div>
             <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Product</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Carbon Calculator</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">AI Diagnostics</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Gamification Dashboard</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Enterprise API</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Carbon Calculator</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">AI Diagnostics</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Gamification Dashboard</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Enterprise API</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="text-white font-bold mb-4 font-mono uppercase text-sm tracking-wider">Resources</h4>
             <ul className="space-y-3 text-sm text-slate-400">
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">IPCC Methodologies</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Climate Glossary</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Community Forum</a></li>
-              <li><a href="#" className="hover:text-emerald-400 transition-colors">Documentation</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">IPCC Methodologies</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Climate Glossary</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Community Forum</a></li>
+              <li><a href="/" className="hover:text-emerald-400 transition-colors">Documentation</a></li>
             </ul>
           </div>
 
@@ -730,9 +730,9 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard, cal
         <div className="max-w-7xl mx-auto mt-16 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between text-xs text-slate-500 font-mono">
           <p>© 2026 EcoTrack AI Corporation. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-white transition-colors">Cookie Settings</a>
+            <a href="/" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/" className="hover:text-white transition-colors">Cookie Settings</a>
           </div>
         </div>
       </footer>

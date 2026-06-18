@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import { describe, it, expect, vi } from 'vitest';
 import App from './App';
 
@@ -39,9 +39,31 @@ describe('App Layout and Navigation', () => {
     // Click on Gamification tab (Eco Missions)
     const gamificationTab = screen.getByText('Eco Missions');
     fireEvent.click(gamificationTab);
-    
-    // Gamification view should now be active (shows points etc)
     const activeChallenge = await screen.findByText(/Active Eco Challenges & Missions/i);
     expect(activeChallenge).toBeInTheDocument();
+
+    // Click on Roadmap tab (Reduction Roadmap)
+    const roadmapTab = screen.getByText('Reduction Roadmap');
+    fireEvent.click(roadmapTab);
+    const roadmapTitle = await screen.findByText(/Carbon Reduction Roadmap Milestones/i);
+    expect(roadmapTitle).toBeInTheDocument();
+
+    // Click on Report tab (Download ESG Reports)
+    const reportTab = screen.getByText('Download ESG Reports');
+    fireEvent.click(reportTab);
+    // Requires scoreResult, so we just verify we can click it without crashing
+
+    // Click on Recommendations tab (Commit Solutions)
+    const recTab = screen.getByText('Commit Solutions');
+    fireEvent.click(recTab);
+
+    // Click on Dashboard tab (Analytics Dashboard)
+    const dashTab = screen.getByText('Analytics Dashboard');
+    fireEvent.click(dashTab);
+
+    // Click on AI Chatbot
+    const chatTab = screen.getByText('AI Chatbot Assistant');
+    fireEvent.click(chatTab);
+    // Requires scoreResult, so we just verify we can click it without crashing
   });
 });

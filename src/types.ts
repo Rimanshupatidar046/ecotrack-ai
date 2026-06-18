@@ -39,6 +39,7 @@ export interface CalculationResult {
     waste: number;
   };
   recommendations: Recommendation[];
+  commentary?: string;
 }
 
 export interface Message {

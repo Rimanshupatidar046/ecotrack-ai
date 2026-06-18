@@ -28,10 +28,10 @@ describe('AiAssistant', () => {
 
   it('sends a message and handles the API response', async () => {
     // Setup mock fetch response
-    (global.fetch as any).mockResolvedValueOnce({
+    global.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
       json: async () => ({ text: 'This is a mock AI response.' }),
-    });
+    }) as unknown as typeof fetch;
 
     render(<AiAssistant scoreResult={mockScore} />);
     
@@ -59,10 +59,10 @@ describe('AiAssistant', () => {
   });
 
   it('handles API errors gracefully', async () => {
-    (global.fetch as any).mockResolvedValueOnce({
+    global.fetch = vi.fn().mockResolvedValueOnce({
       ok: true,
       json: async () => ({}),
-    });
+    }) as unknown as typeof fetch;
 
     render(<AiAssistant scoreResult={mockScore} />);
     

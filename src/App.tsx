@@ -4,7 +4,7 @@
  */
 
 import { useState, useEffect, lazy, Suspense } from "react";
-import { Leaf, Globe, Sparkles, Bot, LogOut, Award, BarChart3, Compass, Milestone, LayoutDashboard, FileText, ChevronRight, Check } from "lucide-react";
+import { Leaf, Globe, Bot, Award, BarChart3, Compass, Milestone, FileText, ChevronRight, Check } from "lucide-react";
 import WeeklyTips from "./components/WeeklyTips";
 
 const LandingPage = lazy(() => import('./components/LandingPage'));
@@ -63,13 +63,14 @@ export default function App() {
   }, [scoreResult]);
 
   // Handle calculator results response
-  const handleCalculationComplete = (data: any) => {
+  const handleCalculationComplete = (data: CalculationResult) => {
     setScoreResult({
       carbonScore: data.carbonScore,
       sustainabilityScore: data.sustainabilityScore,
       impactCategory: data.impactCategory,
       breakdown: data.breakdown,
-      recommendations: data.recommendations
+      recommendations: data.recommendations,
+      commentary: data.commentary
     });
     setCalculatorTaken(true);
     setActiveTab("dashboard");
@@ -78,7 +79,7 @@ export default function App() {
   };
 
   // Commit target priorities to active roadmap goals
-  const handleCommitRecommendation = (id: string, co2: number, savings: number) => {
+  const handleCommitRecommendation = (id: string) => {
     if (!committedIds.includes(id)) {
       setCommittedIds((prev) => [...prev, id]);
       setUserPoints((prev) => prev + 50);
@@ -133,6 +134,9 @@ export default function App() {
   };
   return (
     <div className="w-full min-h-screen text-[#E0E7FF] bg-[#050A0E] flex flex-col font-sans select-text scroll-smooth relative overflow-hidden" id="app-viewport">
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-emerald-600 focus:text-white focus:rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">
+        Skip to main content
+      </a>
       
       {/* Ambient Background Orbs */}
       <div className="absolute top-[-100px] left-[-100px] w-[500px] h-[500px] bg-[#10B981] opacity-[0.08] rounded-full blur-[120px] pointer-events-none z-0"></div>
@@ -194,7 +198,7 @@ export default function App() {
       </header>
 
       {/* 2. Main Page Render Route */}
-      <main id="main-content" className="flex-1 relative z-10">
+      <main id="main-content" className="flex-1 relative z-10" tabIndex={-1}>
         <Suspense fallback={
           <div className="flex-1 flex flex-col items-center justify-center min-h-[600px] gap-4">
             <div className="w-10 h-10 border-4 border-emerald-500/20 border-t-emerald-500 rounded-full animate-spin"></div>
@@ -377,7 +381,7 @@ export default function App() {
               {activeTab === "dashboard" && scoreResult && (
                 <Dashboard 
                   result={scoreResult} 
-                  commentary={scoreResult.recommendations ? (scoreResult as any).commentary || "Diagnostics completed." : ""}
+                  commentary={scoreResult.commentary || "Diagnostics completed."}
                 />
               )}
 

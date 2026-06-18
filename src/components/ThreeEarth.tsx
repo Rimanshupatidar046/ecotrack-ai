@@ -345,6 +345,7 @@ export default function ThreeEarth() {
 
   return (
     <div className="relative w-full h-full min-h-[380px] md:min-h-[500px]" id="three-earth-canvas-container">
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex */}
       <div 
         ref={containerRef} 
         className="w-full h-full cursor-grab active:cursor-grabbing focus-visible:ring-2 focus-visible:ring-emerald-500 focus-visible:ring-inset"

@@ -45,7 +45,7 @@ function WeatherAqiWidget() {
   return (
     <AnimatedCard className="bg-white/5 border border-white/10 p-6 md:p-8 rounded-3xl w-full h-full flex flex-col justify-between" glowColor="rgba(59, 130, 246, 0.2)">
       <div className="flex items-center justify-between pb-4 border-b border-white/10">
-        <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-2"><CloudRain className="w-5 h-5"/> LIVE WEATHER & AQI</span>
+        <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold flex items-center gap-2"><CloudRain className="w-5 h-5" aria-hidden="true" /> LIVE WEATHER & AQI</span>
         <span className="flex h-3 w-3 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
           <span className="relative inline-flex rounded-full h-3 w-3 bg-blue-500"></span>
@@ -54,7 +54,7 @@ function WeatherAqiWidget() {
       <div className="pt-6 grid grid-cols-2 gap-6">
         <div>
           <span className="block text-xs text-slate-500 font-mono uppercase mb-1">Local AQI</span>
-          <span className="text-4xl font-bold text-blue-400 flex items-center gap-3"><Wind className="w-8 h-8"/> {data.aqi}</span>
+          <span className="text-4xl font-bold text-blue-400 flex items-center gap-3"><Wind className="w-8 h-8" aria-hidden="true" /> {data.aqi}</span>
           <span className="text-sm text-slate-400 mt-2 block">Air Quality Index</span>
         </div>
         <div>
@@ -76,7 +76,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
   if (!result) {
     return (
       <div className="glassmorphism rounded-3xl p-12 text-center text-slate-400 flex flex-col items-center justify-center min-h-[450px]">
-        <AlertCircle className="w-16 h-16 text-emerald-500/50 mb-6 animate-bounce" />
+        <AlertCircle className="w-16 h-16 text-emerald-500/50 mb-6 animate-bounce"  aria-hidden="true" />
         <h3 className="text-2xl font-bold text-white mb-3">No Emissions Profile Active</h3>
         <p className="text-base max-w-md mx-auto leading-relaxed text-slate-400">
           Complete the Carbon Assessment form to compile high fidelity scientific indicators, breakdown charts, and AI-personalized recommendations.
@@ -162,7 +162,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
           onClick={() => window.print()}
           className="flex items-center space-x-3 bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 px-6 py-3 rounded-2xl text-sm font-bold transition-all active:scale-95 border border-emerald-500/30 shadow-lg shadow-emerald-500/10"
         >
-          <FileDown className="w-5 h-5" />
+          <FileDown className="w-5 h-5"  aria-hidden="true" />
           <span>Export PDF Report</span>
         </button>
       </div>
@@ -179,7 +179,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
             <div className="flex items-center justify-between pb-5 border-b border-white/10">
               <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold">ANNUAL GLOBAL MASS</span>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <Globe className="w-8 h-8 text-emerald-400 animate-spin" style={{ animationDuration: '24s' }} />
+                <Globe className="w-8 h-8 text-emerald-400 animate-spin" style={{ animationDuration: '24s' }}  aria-hidden="true" />
               </div>
             </div>
             <div className="pt-6 space-y-2 flex-grow">
@@ -203,7 +203,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
             <div className="flex items-center justify-between pb-5 border-b border-white/10">
               <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold">ECO SCORE</span>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <Award className="w-8 h-8 text-cyan-400" />
+                <Award className="w-8 h-8 text-cyan-400"  aria-hidden="true" />
               </div>
             </div>
             <div className="pt-6 flex items-center space-x-6 flex-grow">
@@ -250,7 +250,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
             <div className="flex items-center justify-between pb-5 border-b border-white/10">
               <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold">EPIDEMIOLOGY IMPACT</span>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <ShieldAlert className="w-8 h-8 text-amber-400" />
+                <ShieldAlert className="w-8 h-8 text-amber-400"  aria-hidden="true" />
               </div>
             </div>
             <div className="pt-6 flex flex-col justify-center flex-grow">
@@ -275,7 +275,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold">TREE EQUIVALENT</span>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <Leaf className="w-8 h-8 text-emerald-400" />
+                <Leaf className="w-8 h-8 text-emerald-400"  aria-hidden="true" />
               </div>
             </div>
             <div className="pt-6 flex flex-col">
@@ -291,7 +291,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
             <div className="flex items-center justify-between pb-4 border-b border-white/10">
               <span className="text-sm font-mono text-slate-400 uppercase tracking-wider font-semibold">WEEKLY GOAL</span>
               <div className="bg-white/5 p-3 rounded-xl border border-white/10">
-                <Target className="w-8 h-8 text-purple-400" />
+                <Target className="w-8 h-8 text-purple-400"  aria-hidden="true" />
               </div>
             </div>
             <div className="pt-6 flex flex-col justify-center h-full">
@@ -320,11 +320,11 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
         className="glassmorphism-emerald p-6 md:p-8 rounded-3xl flex flex-col md:flex-row gap-6 items-start border border-emerald-500/30 shadow-2xl shadow-emerald-500/10"
       >
         <div className="bg-emerald-500/20 p-4 rounded-2xl border border-emerald-500/30 hidden md:block">
-          <Sparkles className="w-8 h-8 text-emerald-400 animate-pulse" />
+          <Sparkles className="w-8 h-8 text-emerald-400 animate-pulse"  aria-hidden="true" />
         </div>
         <div className="space-y-3 w-full text-left">
           <div className="flex items-center space-x-3 text-sm font-mono text-emerald-400 font-bold tracking-wide">
-            <Sparkles className="w-5 h-5 text-emerald-400 block md:hidden" />
+            <Sparkles className="w-5 h-5 text-emerald-400 block md:hidden"  aria-hidden="true" />
             <span>AI CLIMATE ADVISOR SUMMARY</span>
           </div>
           <p className="text-lg md:text-xl text-emerald-50 leading-relaxed font-sans italic opacity-90">
@@ -430,7 +430,7 @@ export default function Dashboard({ result, commentary }: DashboardProps) {
         <div className="border-b border-white/10 pb-4 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <div className="bg-emerald-500/20 p-2 rounded-lg border border-emerald-500/30">
-              <TrendingDown className="w-5 h-5 text-emerald-400" />
+              <TrendingDown className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
             </div>
             <span className="text-lg font-bold text-white font-sans">Your Simulated Carbon Reduction Forecast</span>
           </div>

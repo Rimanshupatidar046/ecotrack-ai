@@ -13,11 +13,26 @@ describe('Carbon Calculator', () => {
     expect(screen.getAllByText(/Transportation/i).length).toBeGreaterThan(0);
   });
 
-  it('can progress through the steps and submit', async () => {
+  it('can progress through the steps, change inputs, and submit', async () => {
+    // Mock fetch for submission
+    global.fetch = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        carbonScore: 2.5,
+        sustainabilityScore: 90,
+        impactCategory: 'Excellent',
+        breakdown: { transport: 0.5, energy: 1.0, food: 0.5, waste: 0.5 },
+        recommendations: [],
+        commentary: 'Test mock'
+      })
+    }) as unknown as typeof fetch;
+
     const setMock = vi.fn();
     render(<CarbonCalculator onCalculationComplete={mockOnComplete} isLoading={false} setIsLoading={setMock} />);
     
-    // Step 1: Transport -> Click Next
+    // Step 1: Transport -> Change input and click Next
+    const carInput = screen.getByLabelText('Car Travel Distance');
+    fireEvent.change(carInput, { target: { value: '20' } });
     const nextButton1 = screen.getByText('Next Parameter');
     fireEvent.click(nextButton1);
     
@@ -39,6 +54,7 @@ describe('Carbon Calculator', () => {
     // After clicking, it should call setIsLoading(true)
     await waitFor(() => {
       expect(setMock).toHaveBeenCalledWith(true);
+      expect(global.fetch).toHaveBeenCalledTimes(1);
     });
   });
 });

@@ -4,7 +4,7 @@
  */
 
 import { EcoChallenge, AchievementBadge } from "../types";
-import { Trophy, Compass, Star, TreeDeciduous, CheckCircle2, Check } from "lucide-react";
+import { Trophy, Compass, TreeDeciduous, CheckCircle2, Check } from "lucide-react";
 import { motion } from "motion/react";
 import { AnimatedCard } from "./AnimatedCard";
 
@@ -100,7 +100,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
         <div className="border-b border-white/10 pb-4 mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-base font-bold text-white flex items-center space-x-2">
-              <Compass className="w-5 h-5 text-emerald-400" />
+              <Compass className="w-5 h-5 text-emerald-400"  aria-hidden="true" />
               <span>Active Eco Challenges & Missions</span>
             </h2>
             <p className="text-[11px] text-slate-400">Complete standard physical tasks to register carbon points</p>
@@ -124,7 +124,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
             >
               <div className="flex items-center space-x-3.5">
                 <div className={`p-2 rounded-xl border ${task.completed ? "border-emerald-500/10 text-emerald-500/40" : "border-white/10 text-emerald-400"}`}>
-                  <TreeDeciduous className="w-4 h-4" />
+                  <TreeDeciduous className="w-4 h-4"  aria-hidden="true" />
                 </div>
                 <div>
                   <h3 className={`text-sm font-bold ${task.completed ? "line-through text-slate-505" : "text-white"}`}>{task.title}</h3>
@@ -144,7 +144,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
                   }`}
                 >
                   {task.completed ? (
-                      <CheckCircle2 className="w-5 h-5" />
+                      <CheckCircle2 className="w-5 h-5"  aria-hidden="true" />
                   ) : (
                     <span className="text-[10px] font-bold">+{task.points}</span>
                   )}
@@ -163,7 +163,7 @@ export default function Gamification({ challenges, badges, userPoints, onComplet
       >
         
         <div className="border-b border-white/10 pb-4 mb-4 flex items-center space-x-2">
-          <Trophy className="w-5 h-5 text-emerald-400 animate-bounce" />
+          <Trophy className="w-5 h-5 text-emerald-400 animate-bounce"  aria-hidden="true" />
           <div>
             <h2 className="text-base font-bold text-white">Earned Badges & Ribbons</h2>
             <p className="text-[11px] text-slate-400">Unlock awards based on carbon reductions</p>
