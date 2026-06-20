@@ -5,7 +5,7 @@
 
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Leaf, Globe, Bot, Award, BarChart3, Compass, Milestone, FileText, ChevronRight, Check } from "lucide-react";
-import WeeklyTips from "./components/WeeklyTips";
+const WeeklyTips = lazy(() => import('./components/WeeklyTips'));
 
 const LandingPage = lazy(() => import('./components/LandingPage'));
 const CarbonCalculator = lazy(() => import('./components/CarbonCalculator'));
@@ -61,6 +61,16 @@ export default function App() {
       setBadges(prev => prev.map(b => b.id === "b_4" ? { ...b, unlocked: true } : b));
     }
   }, [scoreResult]);
+
+  // Update document title dynamically based on current route/tab for better SEO
+  useEffect(() => {
+    let title = "EcoTrack AI - Carbon Metric Engine & Sustainability Dashboard";
+    if (activeView === "app") {
+      const tabName = activeTab.charAt(0).toUpperCase() + activeTab.slice(1);
+      title = `EcoTrack AI - ${tabName}`;
+    }
+    document.title = title;
+  }, [activeView, activeTab]);
 
   // Handle calculator results response
   const handleCalculationComplete = (data: CalculationResult) => {

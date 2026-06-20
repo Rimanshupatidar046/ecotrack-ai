@@ -85,8 +85,7 @@ export const FALLBACK_RECOMMENDATIONS = [
 ];
 
 const generateFallbackCommentary = (
-  impactCategory: string,
-  carbonScore: number
+  impactCategory: string
 ): string => {
   if (impactCategory === "Excellent") {
     return "Spectacular effort! Your lifestyle footprints are exceptional to the environment. Your conscious choices in green commuting and high zero-carbon offsets are demonstrating a sustainable future model.";
@@ -202,7 +201,6 @@ Current User Context: ${scoreCtx}`;
 export const buildCalculatedResponse = async (inputs: Record<string, any>) => {
   const {
     carKm = 0,
-    bikeKm = 0,
     publicTransport = "none",
     flightsYear = 0,
     electricityKwh = 0,
@@ -281,7 +279,7 @@ export const buildCalculatedResponse = async (inputs: Record<string, any>) => {
   });
 
   if (!commentary) {
-    commentary = generateFallbackCommentary(impactCategory, carbonScore);
+    commentary = generateFallbackCommentary(impactCategory);
   }
 
   return {

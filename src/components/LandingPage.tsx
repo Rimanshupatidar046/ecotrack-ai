@@ -4,8 +4,8 @@
  */
 
 import { Leaf, ShieldCheck, Cpu, Zap, Trophy, HelpCircle, ArrowRight, Star, Globe, Sparkles, Twitter, Linkedin, Github, Mail, Activity, BrainCircuit, Rocket } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import ThreeEarth from "./ThreeEarth";
+import { useEffect, useRef, useState, lazy, Suspense } from "react";
+const ThreeEarth = lazy(() => import('./ThreeEarth'));
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion, AnimatePresence } from "motion/react";
@@ -255,7 +255,9 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
             transition={{ duration: 1, ease: "easeOut" }}
           >
             <div className="w-full h-[450px] md:h-[520px] rounded-2xl bg-white/5 border border-white/10 relative shadow-2xl overflow-hidden glassmorphism shadow-cyan-500/5">
-              <ThreeEarth />
+              <Suspense fallback={<div className="w-full h-full animate-pulse bg-white/5" />}>
+                <ThreeEarth />
+              </Suspense>
             </div>
           </motion.div>
 
@@ -436,6 +438,10 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
                 <img 
                   src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80" 
                   alt="Platform Dashboard" 
+                  width="1200"
+                  height="224"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-56 object-cover rounded-2xl border border-white/10 shadow-2xl shadow-emerald-500/10"
                 />
               </div>
@@ -498,6 +504,10 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
                   <img 
                     src={benefit.image} 
                     alt={benefit.title} 
+                    width="800"
+                    height="400"
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" 
                   />
                 </div>
@@ -554,7 +564,7 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
                       <p className="text-slate-300 text-base italic leading-relaxed">"{t.quote}"</p>
                     </div>
                     <div className="pt-6 border-t border-white/10 flex items-center space-x-4">
-                      <img src={t.avatar} alt={t.author} className="w-12 h-12 rounded-full border-2 border-emerald-500/50 object-cover shadow-lg shadow-emerald-500/20" />
+                      <img src={t.avatar} alt={t.author} width="48" height="48" loading="lazy" decoding="async" className="w-12 h-12 rounded-full border-2 border-emerald-500/50 object-cover shadow-lg shadow-emerald-500/20" />
                       <div>
                         <span className="block text-white text-sm font-bold">{t.author}</span>
                         <span className="block text-emerald-400/80 font-mono text-xs mt-0.5">{t.role}</span>
@@ -641,6 +651,10 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
           <img 
             src="https://images.unsplash.com/photo-1500829243541-74b677fecc30?auto=format&fit=crop&w=1600&q=80" 
             alt="Nature Canopy" 
+            width="1600"
+            height="400"
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover opacity-60 mix-blend-overlay"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-[#050B14] via-[#050B14]/80 to-[#050B14]" />
@@ -677,13 +691,13 @@ export default function LandingPage({ onStartCalculator, onExploreDashboard }: L
               Leading the transition to a carbon-neutral future through advanced environmental telemetry, AI-driven insights, and community action.
             </p>
             <div className="flex space-x-4 pt-2">
-              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-slate-400 hover:text-emerald-400 transition-all">
+              <a href="/" aria-label="EcoTrack AI Twitter Profile" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-emerald-500/20 hover:border-emerald-500/50 text-slate-400 hover:text-emerald-400 transition-all">
                 <Twitter className="w-4 h-4"  aria-hidden="true" />
               </a>
-              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all">
+              <a href="/" aria-label="EcoTrack AI LinkedIn Page" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-cyan-500/20 hover:border-cyan-500/50 text-slate-400 hover:text-cyan-400 transition-all">
                 <Linkedin className="w-4 h-4"  aria-hidden="true" />
               </a>
-              <a href="/" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/20 hover:border-white/30 text-slate-400 hover:text-white transition-all">
+              <a href="/" aria-label="EcoTrack AI GitHub Repository" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:bg-white/20 hover:border-white/30 text-slate-400 hover:text-white transition-all">
                 <Github className="w-4 h-4"  aria-hidden="true" />
               </a>
             </div>
